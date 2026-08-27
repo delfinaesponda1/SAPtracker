@@ -1,0 +1,1112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joule Work Desktop — Complete CBP Guide</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;background:#0c1a2e;color:#1D1D1B}
+:root{
+  --blue:#0070F2;--blue-dk:#0057BA;--blue-dp:#003D8F;--blue-lt:#EBF3FF;
+  --gold:#E8A000;--text:#1D1D1B;--text2:#595959;--white:#FFF;
+  --bg:#F4F6FA;--bord:#E2E2E2;--green:#0A6E2C;--grn-bg:#E8F5EE;
+  --red:#B50000;--warn:#FFF8EC;
+  --BAR:56px;--NAV:66px;--PRG:4px
+}
+body.lang-en .es{display:none!important}
+body.lang-es .en{display:none!important}
+
+/* ── TOP BAR ── */
+#topbar{position:fixed;top:0;left:0;right:0;height:var(--BAR);background:var(--blue-dp);display:flex;align-items:center;justify-content:space-between;padding:0 24px;z-index:300;border-bottom:1px solid rgba(255,255,255,.1)}
+.tb-l{display:flex;align-items:center;gap:12px}
+.tb-r{display:flex;align-items:center;gap:14px}
+.sap-logo{background:white;color:var(--blue-dp);font-size:13px;font-weight:900;letter-spacing:1.5px;padding:3px 8px;border-radius:3px;line-height:1;flex-shrink:0}
+.tb-title{color:rgba(255,255,255,.8);font-size:14px}
+#ctr{color:rgba(255,255,255,.55);font-size:12.5px;font-variant-numeric:tabular-nums}
+#langBtn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.3);color:white;padding:5px 13px;border-radius:16px;font-size:12px;font-weight:600;cursor:pointer;transition:.2s}
+#langBtn:hover{background:rgba(255,255,255,.2)}
+
+/* ── PROGRESS ── */
+#prog{position:fixed;top:var(--BAR);left:0;right:0;height:var(--PRG);background:rgba(255,255,255,.1);z-index:299}
+#pf{height:100%;background:var(--gold);transition:width .4s cubic-bezier(.4,0,.2,1)}
+
+/* ── WRAP ── */
+#wrap{position:fixed;top:calc(var(--BAR) + var(--PRG));bottom:var(--NAV);left:0;right:0;overflow:hidden}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;overflow-y:auto}
+.slide.active{display:flex}
+.slide.af{animation:af .32s ease-out}
+.slide.ab{animation:ab .32s ease-out}
+@keyframes af{from{opacity:0;transform:translateX(36px)}to{opacity:1;transform:translateX(0)}}
+@keyframes ab{from{opacity:0;transform:translateX(-36px)}to{opacity:1;transform:translateX(0)}}
+
+/* ── COVER ── */
+.s-cov{background:linear-gradient(145deg,#001534 0%,#003080 45%,#0070F2 100%);align-items:center;justify-content:center;text-align:center;color:white;padding:48px 60px;position:relative;overflow:hidden}
+.s-cov::before,.s-cov::after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,.04)}
+.s-cov::before{width:600px;height:600px;top:-200px;right:-150px}
+.s-cov::after{width:400px;height:400px;bottom:-160px;left:-100px}
+.cov-eye{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:20px;position:relative;z-index:1}
+.cov-t{font-size:56px;font-weight:800;letter-spacing:-2.5px;line-height:1.05;margin-bottom:14px;position:relative;z-index:1}
+.cov-t .hi{color:var(--gold)}
+.cov-sub{font-size:18px;font-weight:300;opacity:.8;max-width:560px;margin:0 auto 36px;line-height:1.55;position:relative;z-index:1}
+.cov-tags{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;position:relative;z-index:1}
+.cov-tag{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);padding:6px 16px;border-radius:20px;font-size:12px;font-weight:500}
+.cov-foot{position:absolute;bottom:14px;font-size:11px;color:rgba(255,255,255,.28);z-index:1}
+
+/* ── CONTENT SLIDE ── */
+.s-con{background:var(--bg)}
+.s-hd{background:var(--blue);color:white;padding:17px 40px 15px;flex-shrink:0}
+.s-hd.dk{background:var(--blue-dp)}
+.stag{font-size:10px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;opacity:.6;margin-bottom:3px}
+.s-hd h2{font-size:23px;font-weight:700;letter-spacing:-.4px;line-height:1.2}
+.s-hd .sd{font-size:13px;opacity:.8;margin-top:3px}
+.s-bd{flex:1;padding:20px 40px 24px;overflow-y:auto}
+
+/* ── OUTRO ── */
+.s-out{background:linear-gradient(145deg,#001534 0%,#003080 45%,#0070F2 100%);color:white;align-items:center;justify-content:center;text-align:center;padding:40px 60px;position:relative;overflow:hidden}
+.s-out::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:rgba(255,255,255,.04);top:-180px;right:-120px}
+.ot{font-size:38px;font-weight:800;letter-spacing:-1px;margin-bottom:10px;position:relative;z-index:1}
+.os{font-size:16px;opacity:.7;margin-bottom:30px;position:relative;z-index:1}
+.og{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:820px;width:100%;position:relative;z-index:1}
+.oc{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:18px 15px;text-align:left}
+.on{font-size:28px;font-weight:900;opacity:.22;line-height:1;margin-bottom:6px}
+.otit{font-size:14px;font-weight:700;margin-bottom:4px}
+.od{font-size:12px;opacity:.68;line-height:1.45}
+
+/* ── INFO BOX ── */
+.ibox{border-left:4px solid var(--blue);background:var(--blue-lt);border-radius:0 8px 8px 0;padding:13px 16px;margin:10px 0}
+.ibox.gold{border-color:var(--gold);background:var(--warn)}
+.ibox.green{border-color:var(--green);background:var(--grn-bg)}
+.ibox.red{border-color:var(--red);background:#FFF0F0}
+.ibt{font-size:13px;font-weight:700;color:var(--blue-dk);margin-bottom:5px}
+.ibox.gold .ibt{color:#7A5200}
+.ibox.green .ibt{color:var(--green)}
+.ibox.red .ibt{color:var(--red)}
+.ibox p,.ibox li{font-size:13.5px;line-height:1.6;color:var(--text)}
+
+/* ── TABLE ── */
+.tw{border-radius:8px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.09);margin:10px 0}
+table{width:100%;border-collapse:collapse;font-size:13px;background:white}
+thead tr{background:var(--blue-dp)}
+thead th{padding:9px 13px;text-align:left;color:white;font-weight:600;font-size:12px}
+tbody tr{border-bottom:1px solid #EEE}
+tbody tr:last-child{border-bottom:none}
+tbody tr:nth-child(even){background:#F6FAFF}
+tbody td{padding:9px 13px;line-height:1.5;color:var(--text);vertical-align:top}
+tbody td:first-child{font-weight:600;color:var(--blue-dk)}
+.sm-table table{font-size:12px}
+.sm-table thead th{padding:7px 10px;font-size:11px}
+.sm-table tbody td{padding:7px 10px}
+
+/* ── GRIDS ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:10px 0}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin:10px 0}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:10px 0}
+
+/* ── CARD ── */
+.card{background:white;border-radius:10px;border:1px solid var(--bord);padding:16px;box-shadow:0 1px 5px rgba(0,0,0,.07)}
+.ch{font-size:13.5px;font-weight:700;color:var(--blue-dk);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.ch .ico{font-size:15px}
+.card p,.card li{font-size:13px;color:var(--text2);line-height:1.55}
+.card ul{padding-left:14px;margin-top:4px}
+.card li{margin-bottom:3px}
+
+/* ── LISTS ── */
+.bl{list-style:none;padding:0;margin:6px 0}
+.bl li{display:flex;gap:9px;align-items:flex-start;margin-bottom:7px;font-size:13.5px;color:var(--text);line-height:1.5}
+.bl li::before{content:'▸';color:var(--blue);font-size:11px;margin-top:3px;flex-shrink:0}
+.bl li strong{font-weight:600;color:var(--text)}
+.sl{list-style:none;padding:0;counter-reset:sc;margin:8px 0}
+.sl li{counter-increment:sc;display:flex;gap:11px;align-items:flex-start;margin-bottom:9px;font-size:13.5px;color:var(--text);line-height:1.5}
+.sl li::before{content:counter(sc);min-width:22px;height:22px;background:var(--blue);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11.5px;font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* ── SECTION HEADING ── */
+.sh{font-size:14px;font-weight:700;color:var(--blue-dk);border-bottom:2px solid var(--blue-lt);padding-bottom:4px;margin:14px 0 8px}
+
+/* ── KBD ── */
+.kbd{background:#F0F0F0;border:1px solid #C8C8C8;border-radius:4px;padding:1px 6px;font-size:11.5px;font-family:monospace;color:var(--text)}
+
+/* ── INTERFACE DIAGRAM ── */
+.idg{display:grid;grid-template-columns:150px 1fr 150px;gap:5px;background:#0c1a2e;border-radius:10px;padding:12px;margin:10px 0;min-height:148px}
+.pbox{border-radius:7px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;padding:10px}
+.pbox-l,.pbox-r{background:rgba(255,255,255,.08)}
+.pbox-f{background:rgba(255,255,255,.14)}
+.p-lbl{color:var(--gold);font-size:10.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
+.p-nm{color:rgba(255,255,255,.88);font-size:12px;font-weight:600;margin-bottom:2px}
+.p-ds{color:rgba(255,255,255,.5);font-size:11px;line-height:1.35}
+
+/* ── SECURITY GRID ── */
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:10px 0}
+.sc{background:white;border-radius:8px;padding:13px 15px;border:1px solid #DCEAFF;border-left:4px solid var(--blue)}
+.sc-t{font-size:13px;font-weight:700;color:var(--blue-dk);margin-bottom:4px}
+.sc-d{font-size:12px;color:var(--text2);line-height:1.45}
+
+/* ── DO/DON'T ── */
+.dg{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin:10px 0}
+.dc{background:white;border-radius:8px;padding:13px 15px;border:1px solid #E2E2E2}
+.dc-t{font-size:13px;font-weight:700;margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid #EEE}
+.dc.do .dc-t{color:var(--green);border-color:#BCE4CB}
+.dc.dont .dc-t{color:var(--red);border-color:#F5C0C0}
+.do-item,.dont-item{display:flex;gap:8px;margin-bottom:6px;font-size:12.5px;line-height:1.45;color:var(--text2)}
+.do-icon{color:var(--green);font-weight:700;flex-shrink:0}
+.dont-icon{color:var(--red);font-weight:700;flex-shrink:0}
+
+/* ── AI MODEL CARDS ── */
+.mc{background:white;border-radius:10px;padding:16px;border:1px solid var(--bord);text-align:center;box-shadow:0 1px 5px rgba(0,0,0,.07)}
+.mc .mc-name{font-size:18px;font-weight:800;margin-bottom:6px}
+.mc .mc-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:600;margin-bottom:8px}
+.mc .mc-mm{font-size:13px;color:var(--text2);font-style:italic;margin-bottom:8px;line-height:1.4}
+.mc .mc-when{font-size:12.5px;color:var(--text);line-height:1.45}
+.mc.light .mc-name{color:var(--green)}
+.mc.light .mc-badge{background:var(--grn-bg);color:var(--green)}
+.mc.std .mc-name{color:var(--blue-dk)}
+.mc.std .mc-badge{background:var(--blue-lt);color:var(--blue-dk)}
+.mc.ext .mc-name{color:var(--blue-dp)}
+.mc.ext .mc-badge{background:#E0EAFF;color:var(--blue-dp)}
+
+/* ── CGF FRAMEWORK ── */
+.cgf{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:10px 0}
+.cgf-card{border-radius:10px;padding:14px 15px;border:2px solid var(--bord)}
+.cgf-card.ctx{border-color:var(--blue-dp);background:#EFF5FF}
+.cgf-card.goal{border-color:var(--blue);background:#F0F7FF}
+.cgf-card.fmt{border-color:var(--gold);background:#FFFBF0}
+.cgf-letter{font-size:28px;font-weight:900;opacity:.2;line-height:1}
+.cgf-title{font-size:14px;font-weight:700;margin-bottom:6px;margin-top:-4px}
+.cgf-card.ctx .cgf-title{color:var(--blue-dp)}
+.cgf-card.goal .cgf-title{color:var(--blue-dk)}
+.cgf-card.fmt .cgf-title{color:#7A5200}
+.cgf-desc{font-size:12.5px;color:var(--text2);line-height:1.45;margin-bottom:6px}
+.cgf-ex{font-size:11.5px;font-style:italic;color:var(--text);background:white;border-radius:5px;padding:5px 8px;border-left:3px solid #DDD}
+.cgf-card.ctx .cgf-ex{border-color:var(--blue-dp)}
+.cgf-card.goal .cgf-ex{border-color:var(--blue)}
+.cgf-card.fmt .cgf-ex{border-color:var(--gold)}
+
+/* ── USE CASES ── */
+.ucg{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+.uc{background:white;border-radius:10px;padding:14px 15px;border:1px solid var(--bord);box-shadow:0 1px 4px rgba(0,0,0,.07)}
+.uc-who{font-size:12px;font-weight:700;color:var(--blue-dp);letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px}
+.uc-task{font-size:13.5px;font-weight:700;color:var(--text);margin-bottom:5px}
+.uc-desc{font-size:12.5px;color:var(--text2);line-height:1.45}
+
+/* ── FAQ ── */
+.faq-item{background:white;border-radius:8px;padding:13px 16px;margin-bottom:9px;border-left:4px solid var(--blue);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.faq-q{font-size:13.5px;font-weight:700;color:var(--blue-dk);margin-bottom:5px}
+.faq-a{font-size:13px;color:var(--text2);line-height:1.55}
+
+/* ── ECOSYSTEM CARDS ── */
+.eco-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:10px 0}
+.eco-card{background:white;border-radius:10px;padding:14px 12px;border:1px solid var(--bord);border-top:4px solid var(--blue);box-shadow:0 1px 5px rgba(0,0,0,.07)}
+.eco-card:nth-child(1){border-top-color:#0070F2}
+.eco-card:nth-child(2){border-top-color:#0057BA}
+.eco-card:nth-child(3){border-top-color:#003D8F}
+.eco-card:nth-child(4){border-top-color:#E8A000}
+.eco-title{font-size:13.5px;font-weight:800;color:var(--text);margin-bottom:3px}
+.eco-aud{font-size:10px;font-weight:700;color:var(--blue);letter-spacing:.8px;text-transform:uppercase;margin-bottom:7px}
+.eco-desc{font-size:11.5px;color:var(--text2);line-height:1.5}
+.eco-tag{display:inline-block;background:var(--blue-lt);color:var(--blue-dk);font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;margin:3px 2px 0 0}
+
+/* ── BENEFIT CARDS ── */
+.ben-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:10px 0}
+.ben-card{background:white;border-radius:10px;padding:14px 12px;border:1px solid var(--bord);box-shadow:0 1px 5px rgba(0,0,0,.07)}
+.ben-title{font-size:13px;font-weight:700;color:var(--blue-dk);margin-bottom:8px;border-bottom:1px solid #EEF3FF;padding-bottom:6px}
+.ben-card p,.ben-card li{font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:3px}
+.ben-card ul{padding-left:12px}
+
+/* ── UTILITIES ── */
+.mt8{margin-top:8px}
+.mt12{margin-top:12px}
+.red-text{color:var(--red)}
+
+/* ── NAV ── */
+#nav{position:fixed;bottom:0;left:0;right:0;height:var(--NAV);background:white;border-top:1px solid #E0E0E0;display:flex;align-items:center;justify-content:center;gap:14px;z-index:300}
+.nb{width:42px;height:42px;background:var(--blue);color:white;border:none;border-radius:50%;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;box-shadow:0 3px 10px rgba(0,112,242,.3)}
+.nb:hover{background:var(--blue-dk);transform:scale(1.06)}
+.nb:disabled{background:#D0D0D0;cursor:default;transform:none;box-shadow:none}
+#dots{display:flex;gap:5px;align-items:center;flex-wrap:wrap;max-width:600px;justify-content:center}
+.dot{width:7px;height:7px;border-radius:50%;background:#D0D0D0;cursor:pointer;transition:.2s}
+.dot.on{background:var(--blue);width:18px;border-radius:4px}
+.dot:hover:not(.on){background:#AAA}
+.nav-hint{position:absolute;right:22px;font-size:11px;color:#BBB}
+
+@media(max-width:680px){
+  .g2,.g3,.g4,.sg,.dg,.cgf,.ucg,.eco-grid,.ben-grid,.og,.idg{grid-template-columns:1fr}
+  .s-bd{padding:14px 18px}
+  .s-hd{padding:14px 18px}
+  .cov-t{font-size:36px}
+  .tb-title{display:none}
+}
+</style>
+</head>
+<body class="lang-en">
+
+<div id="topbar">
+  <div class="tb-l">
+    <span class="sap-logo">SAP</span>
+    <span class="tb-title">Joule Work Desktop — Complete CBP Guide</span>
+  </div>
+  <div class="tb-r">
+    <span id="ctr">1 / 22</span>
+    <button id="langBtn" onclick="toggleLang()">🌐 ES</button>
+  </div>
+</div>
+<div id="prog"><div id="pf" style="width:4.55%"></div></div>
+
+<div id="wrap">
+
+<!-- ══════════ SLIDE 1 · COVER ══════════ -->
+<div class="slide s-cov active" data-n="1">
+  <div class="cov-eye en">SAP Internal Training · CBP Team · Complete Guide</div>
+  <div class="cov-eye es">Capacitación Interna SAP · Equipo CBP · Guía Completa</div>
+  <div class="cov-t">Joule <span class="hi">Work</span> Desktop</div>
+  <div class="cov-sub en">Complete CBP Training Guide — Joule ecosystem, core features, Skills, Connectors, effective prompting, data privacy &amp; responsible AI.</div>
+  <div class="cov-sub es">Guía Completa de Capacitación CBP — ecosistema Joule, funciones principales, Skills, Conectores, prompting efectivo, privacidad de datos e IA responsable.</div>
+  <div class="cov-tags">
+    <span class="cov-tag en">Joule Ecosystem</span><span class="cov-tag es">Ecosistema Joule</span>
+    <span class="cov-tag en">Skills &amp; Connectors</span><span class="cov-tag es">Skills y Conectores</span>
+    <span class="cov-tag en">Privacy &amp; Security</span><span class="cov-tag es">Privacidad y Seguridad</span>
+    <span class="cov-tag en">📖 22 slides · ~35 min</span><span class="cov-tag es">📖 22 diapositivas · ~35 min</span>
+  </div>
+  <div class="cov-foot">© SAP SE — For internal use only</div>
+</div>
+
+<!-- ══════════ SLIDE 2 · JOULE ECOSYSTEM ══════════ -->
+<div class="slide s-con" data-n="2">
+  <div class="s-hd dk">
+    <div class="stag en">SAP AI Portfolio</div><div class="stag es">Portafolio de IA SAP</div>
+    <h2 class="en">The Joule Ecosystem — 4 Products</h2>
+    <h2 class="es">El Ecosistema Joule — 4 Productos</h2>
+    <div class="sd en">Each product serves a different audience and purpose. They are complementary, not competing.</div>
+    <div class="sd es">Cada producto sirve a una audiencia y propósito diferente. Son complementarios, no competidores.</div>
+  </div>
+  <div class="s-bd">
+    <div class="eco-grid">
+      <div class="eco-card">
+        <div class="eco-title">Joule</div>
+        <div class="eco-aud en">Business Users</div><div class="eco-aud es">Usuarios de Negocio</div>
+        <div class="eco-desc en">Native AI Copilot embedded in S/4HANA, SuccessFactors, and Ariba. Understands natural language and executes contextual actions without switching apps. Foundation of the ecosystem — requires no additional setup.</div>
+        <div class="eco-desc es">Copiloto de IA nativo integrado en S/4HANA, SuccessFactors y Ariba. Entiende lenguaje natural y ejecuta acciones contextuales sin cambiar de aplicación. Base del ecosistema — no requiere configuración adicional.</div>
+        <span class="eco-tag en">Embedded in SAP apps</span><span class="eco-tag es">Integrado en apps SAP</span>
+        <span class="eco-tag en">No setup needed</span><span class="eco-tag es">Sin configuración</span>
+      </div>
+      <div class="eco-card">
+        <div class="eco-title">Joule Work</div>
+        <div class="eco-aud en">Multi-SAP Employees</div><div class="eco-aud es">Empleados Multi-SAP</div>
+        <div class="eco-desc en">Browser-based workspace for cross-application AI interactions. Unifies data, apps, and agents — eliminates context-switching across SAP applications. Integrates with SAP Build Work Zone.</div>
+        <div class="eco-desc es">Espacio de trabajo basado en navegador para interacciones de IA entre aplicaciones. Unifica datos, apps y agentes — elimina el cambio de contexto entre aplicaciones SAP. Se integra con SAP Build Work Zone.</div>
+        <span class="eco-tag en">Browser-based</span><span class="eco-tag es">Basado en navegador</span>
+        <span class="eco-tag en">Cross-app AI</span><span class="eco-tag es">IA multi-app</span>
+      </div>
+      <div class="eco-card">
+        <div class="eco-title">Joule Work Desktop</div>
+        <div class="eco-aud en">Power Users</div><div class="eco-aud es">Power Users</div>
+        <div class="eco-desc en">Native app for Windows &amp; macOS — always one click away. Integrates files, calendar, and OS e-mail. Same AI capabilities as Joule Work, delivered at the OS level without needing a browser.</div>
+        <div class="eco-desc es">App nativa para Windows y macOS — siempre a un clic. Integra archivos, calendario y email del SO. Las mismas capacidades de IA que Joule Work, entregadas a nivel de SO sin necesitar un navegador.</div>
+        <span class="eco-tag en">Windows · macOS</span>
+        <span class="eco-tag en">Files + Email + Calendar</span><span class="eco-tag es">Archivos + Email + Calendario</span>
+      </div>
+      <div class="eco-card">
+        <div class="eco-title">Joule Studio</div>
+        <div class="eco-aud en">Developers / IT Admins</div><div class="eco-aud es">Desarrolladores / IT</div>
+        <div class="eco-desc en">Low-code/no-code environment on SAP BTP (SAP Build). Build and publish AI Agents, custom skills, and workflows. Connects to external APIs and OData. Includes access control, testing, and monitoring.</div>
+        <div class="eco-desc es">Entorno low-code/no-code en SAP BTP (SAP Build). Crear y publicar agentes de IA, skills personalizados y flujos de trabajo. Conecta a APIs externas y OData. Incluye control de acceso, pruebas y monitoreo.</div>
+        <span class="eco-tag en">SAP Build (BTP)</span>
+        <span class="eco-tag en">Build &amp; Publish AI Agents</span><span class="eco-tag es">Crear y Publicar Agentes IA</span>
+      </div>
+    </div>
+    <div class="ibox gold mt8">
+      <p class="en">💡 <strong>Key insight:</strong> Joule is the foundation; Joule Work and Joule Work Desktop extend access to it across different surfaces; Joule Studio lets you build custom AI capabilities on top of the entire ecosystem.</p>
+      <p class="es">💡 <strong>Concepto clave:</strong> Joule es la base; Joule Work y Joule Work Desktop extienden el acceso a través de distintas superficies; Joule Studio permite construir capacidades de IA personalizadas sobre todo el ecosistema.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SLIDE 3 · PRODUCT COMPARISON ══════════ -->
+<div class="slide s-con" data-n="3">
+  <div class="s-hd dk">
+    <div class="stag en">Comparison</div><div class="stag es">Comparación</div>
+    <h2 class="en">Joule Ecosystem — Product Comparison</h2>
+    <h2 class="es">Ecosistema Joule — Comparación de Productos</h2>
+    <div class="sd en">5 key dimensions across all 4 products — source: SAP Learning.</div>
+    <div class="sd es">5 dimensiones clave en los 4 productos — fuente: SAP Learning.</div>
+  </div>
+  <div class="s-bd">
+    <div class="tw sm-table">
+      <table>
+        <thead>
+          <tr>
+            <th class="en">Dimension</th><th class="es">Dimensión</th>
+            <th>Joule</th>
+            <th>Joule Work</th>
+            <th>Joule Work Desktop</th>
+            <th>Joule Studio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="en">Primary Purpose</td><td class="es">Propósito Principal</td>
+            <td class="en">AI Copilot embedded in SAP apps. Natural language → contextual actions.</td>
+            <td class="es">Copiloto de IA integrado en apps SAP. Lenguaje natural → acciones contextuales.</td>
+            <td class="en">Centralized browser-based workspace for multi-application SAP AI interactions.</td>
+            <td class="es">Espacio de trabajo centralizado basado en navegador para interacciones de IA multi-app.</td>
+            <td class="en">Native desktop app (Win/Mac) for permanent AI access without a browser.</td>
+            <td class="es">App de escritorio nativa (Win/Mac) para acceso permanente a IA sin navegador.</td>
+            <td class="en">Low-code environment on SAP BTP to build and publish AI Agents, skills &amp; workflows.</td>
+            <td class="es">Entorno low-code en SAP BTP para crear y publicar agentes de IA, skills y flujos de trabajo.</td>
+          </tr>
+          <tr>
+            <td class="en">Target Audience</td><td class="es">Audiencia Objetivo</td>
+            <td class="en">Business users within SAP apps.</td><td class="es">Usuarios de negocio en apps SAP.</td>
+            <td class="en">Employees working with multiple SAP tools.</td><td class="es">Empleados que trabajan con múltiples herramientas SAP.</td>
+            <td class="en">Power users requiring constant desktop AI access.</td><td class="es">Power users que requieren acceso constante a IA en escritorio.</td>
+            <td class="en">Developers, IT Admins, and technical builders.</td><td class="es">Desarrolladores, IT Admins y constructores técnicos.</td>
+          </tr>
+          <tr>
+            <td class="en">Access / Deployment</td><td class="es">Acceso / Despliegue</td>
+            <td class="en">Embedded in S/4HANA, SuccessFactors &amp; Ariba UIs.</td><td class="es">Integrado en S/4HANA, SuccessFactors y Ariba.</td>
+            <td class="en">Accessed via web browser.</td><td class="es">Accedido via navegador web.</td>
+            <td class="en">Native app installed on Windows or macOS.</td><td class="es">App nativa instalada en Windows o macOS.</td>
+            <td class="en">Accessed via SAP Build on SAP BTP.</td><td class="es">Accedido via SAP Build en SAP BTP.</td>
+          </tr>
+          <tr>
+            <td class="en">Customization</td><td class="es">Personalización</td>
+            <td class="en">None — uses pre-built SAP-defined skills.</td><td class="es">Ninguna — usa skills predefinidos por SAP.</td>
+            <td class="en">None — consumes available Joule skills.</td><td class="es">Ninguna — consume skills disponibles de Joule.</td>
+            <td class="en">Skills &amp; Connectors installable by the user.</td><td class="es">Skills y Conectores instalables por el usuario.</td>
+            <td class="en">Full — create, test &amp; publish new AI Agents and custom Joule Skills.</td><td class="es">Completa — crear, probar y publicar agentes y skills personalizados.</td>
+          </tr>
+          <tr>
+            <td class="en">Best Use Case</td><td class="es">Caso de Uso Ideal</td>
+            <td class="en">AI integrated into day-to-day SAP workflows.</td><td class="es">IA integrada en flujos diarios de SAP.</td>
+            <td class="en">Centralized interface for multiple SAP apps without context-switching.</td><td class="es">Interfaz centralizada para múltiples apps SAP sin cambiar de contexto.</td>
+            <td class="en">Immediate AI access from the desktop; files, email, calendar &amp; external systems.</td><td class="es">Acceso inmediato a IA desde el escritorio; archivos, email, calendario y sistemas externos.</td>
+            <td class="en">Extend Joule with custom skills for unique processes or external data.</td><td class="es">Extender Joule con skills personalizados para procesos únicos o datos externos.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ibox mt8">
+      <p class="en">📚 <strong>Source:</strong> SAP Learning — Trainings completed Aug 2026. Rating: 4.5/5 across both missions. Completed by 470+ and 1,981+ people respectively.</p>
+      <p class="es">📚 <strong>Fuente:</strong> SAP Learning — Trainings completados ago 2026. Calificación: 4.5/5 en ambas misiones. Completados por 470+ y 1,981+ personas respectivamente.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SLIDE 4 · WHAT IS JWD ══════════ -->
+<div class="slide s-con" data-n="4">
+  <div class="s-hd">
+    <div class="stag en">Introduction</div><div class="stag es">Introducción</div>
+    <h2 class="en">What is Joule Work Desktop — Really?</h2>
+    <h2 class="es">¿Qué es Joule Work Desktop, Realmente?</h2>
+    <div class="sd en">An agentic, always-available AI business partner — far beyond a basic chatbot.</div>
+    <div class="sd es">Un socio de negocio con IA siempre disponible y agéntico — mucho más que un chatbot básico.</div>
+  </div>
+  <div class="s-bd">
+    <div class="g2">
+      <div class="card">
+        <div class="ch"><span class="ico">💎</span><span class="en">Think of it as...</span><span class="es">Pensá en él como...</span></div>
+        <p class="en">Your <strong>agentic always-available AI business partner</strong>, running right on your desktop. It doesn't just answer questions — it <em>acts.</em> It can complete multi-step tasks autonomously across your tools, files, and systems.</p>
+        <p class="es">Tu <strong>socio de negocio con IA siempre disponible y agéntico</strong>, funcionando en tu escritorio. No solo responde preguntas — <em>actúa.</em> Puede completar tareas de múltiples pasos de forma autónoma en tus herramientas, archivos y sistemas.</p>
+      </div>
+      <div class="card">
+        <div class="ch"><span class="ico">⚡</span><span class="en">It Can:</span><span class="es">Puede:</span></div>
+        <ul class="bl">
+          <li class="en">Read, update, and write your files (sandboxed)</li><li class="es">Leer, actualizar y escribir tus archivos (en sandbox)</li>
+          <li class="en">Search the web for up-to-date information</li><li class="es">Buscar en la web información actualizada</li>
+          <li class="en">List, read, and search emails and calendar events</li><li class="es">Listar, leer y buscar emails y eventos del calendario</li>
+          <li class="en">Connect to enterprise systems via Connectors</li><li class="es">Conectarse a sistemas empresariales via Conectores</li>
+          <li class="en">Learn your specific workflows with Skills</li><li class="es">Aprender tus flujos de trabajo específicos con Skills</li>
+          <li class="en">Run scripts (Python, Node) and create dashboards</li><li class="es">Ejecutar scripts (Python, Node) y crear dashboards</li>
+        </ul>
+      </div>
+    </div>
+    <div class="ibox mt8">
+      <div class="ibt">✨ <span class="en">The key word: Agentic</span><span class="es">La palabra clave: Agéntico</span></div>
+      <p class="en">Joule Work Desktop can <strong>autonomously complete multi-step actions</strong> — meaning it can work <em>for</em> you, not just talk <em>with</em> you. Every action on your machine requires your explicit approval first.</p>
+      <p class="es">Joule Work Desktop puede <strong>completar acciones de múltiples pasos de forma autónoma</strong> — puede trabajar <em>para</em> vos, no solo charlar <em>con</em> vos. Cada acción en tu máquina requiere tu aprobación explícita primero.</p>
+    </div>
+    <div class="sh en">Key Capabilities</div><div class="sh es">Capacidades Principales</div>
+    <div class="tw en">
+      <table>
+        <thead><tr><th>Capability</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td>Conversational AI</td><td>Chat in natural language — draft, summarise, analyse, and plan.</td></tr>
+          <tr><td>File Access</td><td>Read, create, and update files within a sandboxed working directory.</td></tr>
+          <tr><td>Web Search</td><td>Search the web for up-to-date information. Every result is cited.</td></tr>
+          <tr><td>Work Email &amp; Calendar</td><td>Connect Microsoft Outlook to read, search, and summarise emails and events.</td></tr>
+          <tr><td>Connectors (MCP)</td><td>Integrate with Jira, SAP systems, databases, and more via MCP servers.</td></tr>
+          <tr><td>Skills</td><td>Install reusable instruction sets that make Joule an expert in your specific workflows.</td></tr>
+          <tr><td>Spaces</td><td>Create persistent dashboards with KPI cards, tables, and charts.</td></tr>
+          <tr><td>Voice Input</td><td>Dictate using on-device speech-to-text. Audio never leaves your machine.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="tw es">
+      <table>
+        <thead><tr><th>Capacidad</th><th>Descripción</th></tr></thead>
+        <tbody>
+          <tr><td>IA Conversacional</td><td>Chat en lenguaje natural — redactar, resumir, analizar y planificar.</td></tr>
+          <tr><td>Acceso a Archivos</td><td>Leer, crear y actualizar archivos en un directorio de trabajo aislado (sandbox).</td></tr>
+          <tr><td>Búsqueda Web</td><td>Buscar información actualizada en la web. Cada resultado es citado.</td></tr>
+          <tr><td>Email y Calendario</td><td>Conectar Outlook para leer, buscar y resumir emails y eventos.</td></tr>
+          <tr><td>Conectores (MCP)</td><td>Integrar con Jira, sistemas SAP, bases de datos y más via MCP.</td></tr>
+          <tr><td>Skills</td><td>Instalar instrucciones reutilizables que hacen a Joule experto en tus flujos.</td></tr>
+          <tr><td>Spaces</td><td>Crear dashboards persistentes con tarjetas KPI, tablas y gráficos.</td></tr>
+          <tr><td>Entrada de Voz</td><td>Dictar con voz procesada localmente. El audio nunca sale de tu máquina.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ibox gold mt8">
+      <p class="en">💡 Joule will not change your job — but it will change those <strong>30-minute tasks that eat into the parts of your work you actually care about:</strong> checking 50 emails, searching before a meeting, reformatting a doc for the fifth time.</p>
+      <p class="es">💡 Joule no va a cambiar tu trabajo — pero sí cambiará esas <strong>tareas de 30 minutos que le quitan tiempo a lo que realmente te importa:</strong> revisar 50 emails, buscar info antes de una reunión, reformatear un doc por quinta vez.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SLIDE 5 · GETTING STARTED ══════════ -->
+<div class="slide s-con" data-n="5">
+  <div class="s-hd">
+    <div class="stag en">Setup</div><div class="stag es">Configuración</div>
+    <h2 class="en">Getting Started</h2>
+    <h2 class="es">Primeros Pasos</h2>
+    <div class="sd en">Installation, first-launch checklist, and auto-updates.</div>
+    <div class="sd es">Instalación, checklist de primer lanzamiento y actualizaciones automáticas.</div>
+  </div>
+  <div class="s-bd">
+    <div class="ibox green">
+      <div class="ibt en">✅ First-Launch Checklist — do these once after installing:</div>
+      <div class="ibt es">✅ Checklist de Primer Lanzamiento — hacé esto una sola vez al instalar:</div>
+      <ol class="sl">
+        <li><span class="en">Set your default working directory: <em>Settings → General → Directory → Select Folder</em></span><span class="es">Configurar tu directorio de trabajo: <em>Settings → General → Directory → Select Folder</em></span></li>
+        <li><span class="en">(Optional) Connect Microsoft email &amp; calendar: <em>Settings → Account → Work Email / Calendar</em></span><span class="es">(Opcional) Conectar email y calendario de Microsoft: <em>Settings → Account → Work Email / Calendar</em></span></li>
+        <li><span class="en">(Optional) Enable Web Search: <em>Settings → Personalization → Capabilities → Web Search</em></span><span class="es">(Opcional) Activar Búsqueda Web: <em>Settings → Personalization → Capabilities → Web Search</em></span></li>
+        <li><span class="en">Try your first prompt: <em>"What can you do for me?"</em></span><span class="es">Probá tu primer prompt: <em>"¿Qué podés hacer por mí?"</em></span></li>
+      </ol>
+    </div>
+    <div class="g2 mt12">
+      <div class="card">
+        <div class="ch"><span class="ico">🚀</span><span class="en">Opening the App</span><span class="es">Abrir la Aplicación</span></div>
+        <p class="en">Open from the <strong>Start menu (Windows)</strong> or <strong>Launchpad (macOS)</strong>. The app will be pushed to all SAP employee devices. Works offline for file tasks; AI features require network.</p>
+        <p class="es">Abrí desde el <strong>menú Inicio (Windows)</strong> o <strong>Launchpad (macOS)</strong>. La app se distribuirá a todos los dispositivos de empleados SAP. Funciona sin conexión para tareas de archivos; las funciones de IA requieren red.</p>
+      </div>
+      <div class="card">
+        <div class="ch"><span class="ico">🔄</span><span class="en">Auto-Updates</span><span class="es">Actualizaciones Automáticas</span></div>
+        <p class="en">Joule checks for updates automatically. When available, a <strong>banner appears at the top.</strong> Updates download in the background — <strong>you choose when to restart.</strong></p>
+        <p class="es">Joule busca actualizaciones automáticamente. Cuando hay una disponible, aparece un <strong>banner en la parte superior.</strong> Las actualizaciones se descargan en segundo plano — <strong>vos elegís cuándo reiniciar.</strong></p>
+        <p style="font-size:12px;color:#AAA;margin-top:8px;" class="en">Check version: Settings → General → Version</p>
+        <p style="font-size:12px;color:#AAA;margin-top:8px;" class="es">Ver versión: Settings → General → Version</p>
+      </div>
+    </div>
+    <div class="ibox gold mt12">
+      <p class="en"><strong>Mission Statement:</strong> Joule Work Desktop puts a secure, AI-powered productivity assistant on your desktop — connecting to the tools already used at SAP: inbox, files, SAP knowledge, and external systems, all in one place.</p>
+      <p class="es"><strong>Misión:</strong> Joule Work Desktop pone un asistente de productividad seguro con IA en tu escritorio — conectado a las herramientas que ya usás en SAP: inbox, archivos, conocimiento SAP y sistemas externos, todo en un lugar.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ SLIDE 6 · INTERFACE TOUR ══════════ -->
+<div class="slide s-con" data-n="6">
+  <div class="s-hd">
+    <div class="stag en">Navigation</div><div class="stag es">Navegación</div>
+    <h2 class="en">Interface Tour — Three Areas &amp; Controls</h2>
+    <h2 class="es">Tour de la Interfaz — Tres Áreas y Controles</h2>
+    <div class="sd en">Workspace layout, navigation rail, and chat input toolbar.</div>
+    <div class="sd es">Diseño del espacio de trabajo, rail de navegación y controles del chat.</div>
+  </div>
+  <div class="s-bd">
+    <div class="idg">
+      <div class="pbox pbox-l">
+        <div class="p-lbl en">Left Pane</div><div class="p-lbl es">Panel Izq.</div>
+        <div class="p-nm en">List Area</div><div class="p-nm es">Lista</div>
+        <div class="p-ds en">Conversations, Skills, or Connectors list. Fully searchable. <span style="opacity:.7">Ctrl+K / Cmd+K</span></div>
+        <div class="p-ds es">Lista de conversaciones, Skills o Conectores. Totalmente buscable.</div>
+      </div>
+      <div class="pbox pbox-f">
+        <div class="p-lbl en">Focus Pane</div><div class="p-lbl es">Panel Principal</div>
+        <div class="p-nm en">Primary Work Area</div><div class="p-nm es">Área de Trabajo</div>
+        <div class="p-ds en">Chat input + responses. Chat toolbar below for per-conversation controls. Cannot be collapsed.</div>
+        <div class="p-ds es">Input del chat + respuestas. Toolbar del chat abajo para controles por conversación. No se puede colapsar.</div>
+      </div>
+      <div class="pbox pbox-r">
+        <div class="p-lbl en">Right Pane</div><div class="p-lbl es">Panel Der.</div>
+        <div class="p-nm en">Context Area</div><div class="p-nm es">Contextual</div>
+        <div class="p-ds en">Response details (Steps + Sources) or Space controls. Context-sensitive.</div>
+        <div class="p-ds es">Detalles de respuesta (Pasos + Fuentes) o controles del Space. Contextual.</div>
+      </div>
+    </div>
+    <div class="g2 mt8">
+      <div>
+        <div class="sh en">Navigation Rail</div><div class="sh es">Rail de Navegación</div>
+        <div class="tw en">
+          <table>
+            <thead><tr><th>Area</th><th>What it Does</th></tr></thead>
+            <tbody>
+              <tr><td>💬 Conversations</td><td>Primary chat entry point and history.</td></tr>
+              <tr><td>⊛ Spaces</td><td>Persistent dashboards — KPI cards, charts, tables.</td></tr>
+              <tr><td>⬡ Extensions</td><td>Manage installed Skills and Connectors.</td></tr>
+              <tr><td>👤 User Menu</td><td>Settings, AI notice, sign out (your initials).</td></tr>
+              <tr><td>⬜ Expand / Collapse</td><td>Toggle nav bar between labels visible and icons only.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tw es">
+          <table>
+            <thead><tr><th>Área</th><th>Qué Hace</th></tr></thead>
+            <tbody>
+              <tr><td>💬 Conversaciones</td><td>Punto de entrada principal para chatear e historial.</td></tr>
+              <tr><td>⊛ Spaces</td><td>Dashboards persistentes — tarjetas KPI, gráficos, tablas.</td></tr>
+              <tr><td>⬡ Extensiones</td><td>Gestionar Skills y Conectores instalados.</td></tr>
+              <tr><td>👤 Menú de Usuario</td><td>Configuración, aviso de IA, cerrar sesión (tus iniciales).</td></tr>
+              <tr><td>⬜ Expandir / Colapsar</td><td>Alternar barra entre etiquetas visibles e iconos.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="sh en">Chat Input Toolbar</div><div class="sh es">Toolbar del Chat</div>
+        <div class="tw en">
+          <table>
+            <thead><tr><th>Control</th><th>What it Does</th></tr></thead>
+            <tbody>
+              <tr><td>➕ Attach File</td><td>Attach images or documents (max 10 MB) for Joule to read.</td></tr>
+              <tr><td>⚙️ Settings</td><td>Switch AI model; toggle Web Search, Email, Visual Cards, Calendar.</td></tr>
+              <tr><td>📁 Select Folder</td><td>Current working folder. Click to change per conversation.</td></tr>
+              <tr><td>🔌 Connector</td><td>Active MCP connector. Click to switch or manage.</td></tr>
+              <tr><td>🎤 Voice Input</td><td>On-device speech-to-text. Audio never uploaded.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="tw es">
+          <table>
+            <thead><tr><th>Control</th><th>Qué Hace</th></tr></thead>
+            <tbody>
+              <tr><td>➕ Adjuntar</td><td>Adjuntar imágenes o documentos (máx. 10 MB) para que Joule los lea.</td></tr>
+              <tr><td>⚙️ Config</td><td>Cambiar modelo; activar Búsqueda Web, Email, Tarjetas, Calendario.</td></tr>
+              <tr><td>📁 Carpeta</td><td>Carpeta de trabajo actual. Clic para cambiar por conversación.</td></tr>
+              <tr><td>🔌 Conector</td><td>Conector MCP activo. Clic para cambiar o gestionar.</td></tr>
+              <tr><td>🎤 Voz</td><td>Voz a texto en el dispositivo. El audio nunca se sube.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- SLIDE 7: CONVERSATIONS & FILES -->
+<div class="slide s-con" data-n="7">
+  <div class="s-hd"><div class="stag en">Core Features</div><div class="stag es">Funciones Principales</div>
+    <h2 class="en">Conversations &amp; File Management</h2><h2 class="es">Conversaciones y Gesti&#xF3;n de Archivos</h2>
+    <div class="sd en">Managing your chat history and working with local files safely.</div>
+    <div class="sd es">Gesti&#xF3;n del historial de chat y trabajo seguro con archivos locales.</div>
+  </div>
+  <div class="s-bd">
+    <div class="g2">
+      <div>
+        <div class="sh en">Conversations</div><div class="sh es">Conversaciones</div>
+        <div class="ibox"><p class="en">All conversations are <strong>saved automatically</strong> and searchable via <span class="kbd">Ctrl+K</span> / <span class="kbd">Cmd+K</span>. Stop any response with <strong>Stop</strong> or <span class="kbd">Escape</span>. Start a new one from the + New button.</p>
+        <p class="es">Todas las conversaciones se <strong>guardan autom&#xE1;ticamente</strong> y son buscables con <span class="kbd">Ctrl+K</span> / <span class="kbd">Cmd+K</span>. Detener una respuesta con <strong>Stop</strong> o <span class="kbd">Escape</span>.</p></div>
+        <div class="tw en"><table><thead><tr><th>Action</th><th>What it Does</th></tr></thead><tbody>
+          <tr><td>Pin</td><td>Keep important conversations at the top of the list for easy access.</td></tr>
+          <tr><td>Archive</td><td>Hides from Active list but restorable any time.</td></tr>
+          <tr><td style="color:#B50000">Delete</td><td style="color:#B50000">Permanent — cannot be undone. Use Archive if unsure.</td></tr>
+        </tbody></table></div>
+        <div class="tw es"><table><thead><tr><th>Acci&#xF3;n</th><th>Qu&#xE9; Hace</th></tr></thead><tbody>
+          <tr><td>Anclar</td><td>Mantiene conversaciones importantes al tope de la lista.</td></tr>
+          <tr><td>Archivar</td><td>Oculta de la lista activa, restaurable en cualquier momento.</td></tr>
+          <tr><td style="color:#B50000">Eliminar</td><td style="color:#B50000">Permanente. Usar Archivar si no est&#xE1;s seguro.</td></tr>
+        </tbody></table></div>
+      </div>
+      <div>
+        <div class="sh en">Files &amp; Working Directory</div><div class="sh es">Archivos y Directorio de Trabajo</div>
+        <div class="ibox"><div class="ibt en">&#x1F4C1; Working Directory &#x2014; The Key Concept</div><div class="ibt es">&#x1F4C1; Directorio de Trabajo &#x2014; El Concepto Clave</div>
+        <p class="en">The <strong>single folder</strong> Joule can access on your computer. Acts as a <strong>sandbox</strong> &#x2014; Joule cannot read or write anything outside this boundary. Your Desktop, Documents, and other folders remain completely untouched unless explicitly added.</p>
+        <p class="es">La <strong>&#xFA;nica carpeta</strong> a la que Joule puede acceder. Funciona como un <strong>sandbox</strong> &#x2014; no puede leer ni escribir nada fuera de ese l&#xED;mite. Tu Escritorio, Documentos y otras carpetas quedan intactos.</p></div>
+        <div class="card mt8"><div class="ch"><span class="ico">&#x2705;</span><span class="en">What Joule Can Do Inside</span><span class="es">Qu&#xE9; Puede Hacer Joule Adentro</span></div>
+        <ul class="bl">
+          <li class="en">Read any file &#x2014; documents, code, spreadsheets, data</li><li class="es">Leer cualquier archivo &#x2014; documentos, c&#xF3;digo, planillas, datos</li>
+          <li class="en">Write new files &#x2014; reports, scripts, notes, presentations</li><li class="es">Escribir nuevos archivos &#x2014; reportes, scripts, notas, presentaciones</li>
+          <li class="en">Edit existing files and create subdirectories</li><li class="es">Editar archivos existentes y crear subdirectorios</li>
+        </ul></div>
+        <div class="ibox gold mt8"><p class="en"><strong>Artifacts:</strong> When Joule writes a file, it appears as a clickable chip in the chat. Click to open immediately. Files persist after the conversation ends.</p>
+        <p class="es"><strong>Artefactos:</strong> Cuando Joule escribe un archivo, aparece como un chip clickeable en el chat. Clic para abrirlo inmediatamente. Los archivos persisten al terminar la conversaci&#xF3;n.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: AI MODELS + SETTINGS -->
+<div class="slide s-con" data-n="8">
+  <div class="s-hd"><div class="stag en">AI Models &amp; Settings</div><div class="stag es">Modelos de IA y Configuraci&#xF3;n</div>
+    <h2 class="en">Choosing the Right AI Model</h2><h2 class="es">Elegir el Modelo de IA Correcto</h2>
+    <div class="sd en">Three models &#x2014; different speed/depth tradeoffs. Select via the settings icon in the chat toolbar.</div>
+    <div class="sd es">Tres modelos &#x2014; distintos balances entre velocidad y profundidad. Seleccionar via el &#xED;cono de configuraci&#xF3;n en el toolbar del chat.</div>
+  </div>
+  <div class="s-bd">
+    <div class="g3">
+      <div class="mc light"><div class="mc-name">&#x26A1; Light</div><div class="mc-badge en">Fastest</div><div class="mc-badge es">M&#xE1;s R&#xE1;pido</div>
+        <div class="mc-mm en">"A colleague you tap on the shoulder"</div><div class="mc-mm es">"Un colega al que le toc&#xE1;s el hombro"</div>
+        <div class="mc-when en">Fast, simple answers. Quick questions, quick lookups, drafting short messages.</div>
+        <div class="mc-when es">Respuestas r&#xE1;pidas. Preguntas cortas, b&#xFA;squedas r&#xE1;pidas, mensajes breves.</div></div>
+      <div class="mc std"><div class="mc-name">&#x2B50; Standard</div><div class="mc-badge en">Default</div><div class="mc-badge es">Por Defecto</div>
+        <div class="mc-mm en">"Your reliable daily workhorse"</div><div class="mc-mm es">"Tu confiable caballo de batalla diario"</div>
+        <div class="mc-when en">Most everyday business tasks &#x2014; drafting, summarising, analysing documents, working with files and emails.</div>
+        <div class="mc-when es">La mayor&#xED;a de tareas diarias &#x2014; redactar, resumir, analizar documentos, trabajar con archivos y emails.</div></div>
+      <div class="mc ext"><div class="mc-name">&#x1F52C; Extended</div><div class="mc-badge en">Deepest</div><div class="mc-badge es">M&#xE1;s Profundo</div>
+        <div class="mc-mm en">"A specialist you book time with"</div><div class="mc-mm es">"Un especialista al que le reserv&#xE1;s tiempo"</div>
+        <div class="mc-when en">Complex analysis, high-stakes decisions, multi-step reasoning. Takes longer but deeper results.</div>
+        <div class="mc-when es">An&#xE1;lisis complejo, decisiones importantes, razonamiento en m&#xFA;ltiples pasos. Tarda m&#xE1;s pero profundiza m&#xE1;s.</div></div>
+    </div>
+    <div class="ibox mt8"><p class="en"><strong>Rule:</strong> Start with Standard. Step down to Light for quick answers. Step up to Extended for complex or high-stakes tasks. Enable <strong>Extended Thinking</strong> (Settings &#x2192; Personalization) for deeper reasoning within any model.</p>
+    <p class="es"><strong>Regla:</strong> Empez&#xE1; con Standard. Baj&#xE1; a Light para respuestas r&#xE1;pidas. Sub&#xED; a Extended para tareas complejas o de alto impacto. Activ&#xE1; <strong>Extended Thinking</strong> (Settings &#x2192; Personalizaci&#xF3;n) para razonamiento m&#xE1;s profundo.</p></div>
+    <div class="sh en">Key Settings &#x2014; access via your initials at the bottom of the nav bar</div>
+    <div class="sh es">Configuraci&#xF3;n Clave &#x2014; accedé via tus iniciales al fondo de la barra de navegaci&#xF3;n</div>
+    <div class="tw en"><table><thead><tr><th>Section</th><th>Key Options</th></tr></thead><tbody>
+      <tr><td>&#x2699;&#xFE0F; General</td><td>Version, Language, Appearance (Light/Dark/System), Working Directory</td></tr>
+      <tr><td>&#x1F464; Personalization</td><td>Extended Thinking, Voice Input, Web Search, Work Email connection, Personal Instructions, Role Description</td></tr>
+      <tr><td>&#x1F512; Account</td><td>Connect Work Email &amp; Calendar, Usage Statistics (tokens/requests), Security &amp; Privacy status</td></tr>
+    </tbody></table></div>
+    <div class="tw es"><table><thead><tr><th>Secci&#xF3;n</th><th>Opciones Clave</th></tr></thead><tbody>
+      <tr><td>&#x2699;&#xFE0F; General</td><td>Versi&#xF3;n, Idioma, Apariencia (Claro/Oscuro/Sistema), Directorio de Trabajo</td></tr>
+      <tr><td>&#x1F464; Personalizaci&#xF3;n</td><td>Pensamiento Extendido, Entrada de Voz, B&#xFA;squeda Web, Conexi&#xF3;n Email, Instrucciones Personales, Descripci&#xF3;n de Rol</td></tr>
+      <tr><td>&#x1F512; Cuenta</td><td>Conectar Email y Calendario de Trabajo, Estad&#xED;sticas de Uso, Estado de Seguridad y Privacidad</td></tr>
+    </tbody></table></div>
+  </div>
+</div>
+
+<!-- SLIDE 9: SPACES -->
+<div class="slide s-con" data-n="9">
+  <div class="s-hd"><div class="stag en">Persistent Dashboards</div><div class="stag es">Dashboards Persistentes</div>
+    <h2 class="en">Spaces &#x2014; Your Living Control Panel</h2><h2 class="es">Spaces &#x2014; Tu Panel de Control Vivo</h2>
+    <div class="sd en">A Space is a collection of visual cards organised around a topic &#x2014; permanent and refreshable.</div>
+    <div class="sd es">Un Space es una colecci&#xF3;n de tarjetas visuales organizadas alrededor de un tema &#x2014; permanente y actualizable.</div>
+  </div>
+  <div class="s-bd">
+    <div class="ibox"><div class="ibt en">Conversation vs Space &#x2014; Use the Right Tool</div><div class="ibt es">Conversaci&#xF3;n vs Space &#x2014; Us&#xE1; la Herramienta Correcta</div>
+    <p class="en">A <strong>conversation</strong> is disposable and linear &#x2014; great for exploring one-off tasks. A <strong>Space</strong> is permanent and refreshable &#x2014; great for monitoring things you return to regularly: a pipeline, a project overview, a customer briefing, a weekly digest.</p>
+    <p class="es">Una <strong>conversaci&#xF3;n</strong> es descartable y lineal &#x2014; ideal para tareas puntuales. Un <strong>Space</strong> es permanente y actualizable &#x2014; ideal para monitorear cosas a las que volv&#xE9;s regularmente: un pipeline, una vista de proyecto, un briefing de cliente.</p></div>
+    <div class="g2 mt8">
+      <div class="card"><div class="ch"><span class="ico">&#x1F4CA;</span><span class="en">What Goes Inside a Space</span><span class="es">Qu&#xE9; Hay Dentro de un Space</span></div>
+        <ul class="bl">
+          <li class="en"><strong>KPI cards</strong> &#x2014; headline metrics at a glance</li><li class="es"><strong>Tarjetas KPI</strong> &#x2014; m&#xE9;tricas clave de un vistazo</li>
+          <li class="en"><strong>Tables</strong> &#x2014; structured lists with multiple fields</li><li class="es"><strong>Tablas</strong> &#x2014; listas estructuradas con m&#xFA;ltiples campos</li>
+          <li class="en"><strong>Charts</strong> &#x2014; trends and distributions</li><li class="es"><strong>Gr&#xE1;ficos</strong> &#x2014; tendencias y distribuciones</li>
+          <li class="en"><strong>Text summaries</strong> &#x2014; formatted briefings</li><li class="es"><strong>Res&#xFA;menes de texto</strong> &#x2014; briefings formateados</li>
+          <li class="en"><strong>Object lists</strong> &#x2014; items with badges and status</li><li class="es"><strong>Listas de objetos</strong> &#x2014; &#xED;tems con badges y estado</li>
+        </ul></div>
+      <div class="card"><div class="ch"><span class="ico">&#x1F527;</span><span class="en">How to Create &amp; Manage</span><span class="es">C&#xF3;mo Crear y Gestionar</span></div>
+        <ol class="sl">
+          <li><span class="en">Ask Joule: <em>"Create a Space for my [topic]"</em> or <em>"Build me a dashboard showing [what to track]"</em></span><span class="es">Ped&#xED;le: <em>"Crea un Space para [tema]"</em> o <em>"Armame un dashboard que muestre [qu&#xE9; trackear]"</em></span></li>
+          <li><span class="en">Joule builds cards from your available data and sources.</span><span class="es">Joule construye tarjetas con tus datos y fuentes disponibles.</span></li>
+          <li><span class="en">Resize (XS/S/M/L/XL), refresh, or update cards from the right pane anytime.</span><span class="es">Redimension&#xE1; (XS/S/M/L/XL), refresc&#xE1; o actualiz&#xE1; tarjetas desde el panel derecho.</span></li>
+        </ol>
+        <div class="ibox gold" style="margin-top:8px"><p class="en">Best practice: <strong>4&#x2013;7 cards per Space</strong> &#x2014; focused, not overwhelming.</p>
+        <p class="es">Buena pr&#xE1;ctica: <strong>4&#x2013;7 tarjetas por Space</strong> &#x2014; enfocado, no abrumador.</p></div>
+      </div>
+    </div>
+    <div class="ibox green mt8">
+      <p class="en">&#x1F504; <strong>Refreshable cards:</strong> Cards linked to live data (via a Connector) can be refreshed independently &#x2014; no new conversation needed. The right pane in a Space lets you chat with Joule directly to create or update cards without leaving the dashboard.</p>
+      <p class="es">&#x1F504; <strong>Tarjetas actualizables:</strong> Las tarjetas vinculadas a datos en vivo (via Conector) se pueden refrescar de forma independiente. El panel derecho te permite chatear con Joule para crear o actualizar tarjetas sin salir del dashboard.</p></div>
+  </div>
+</div>
+
+<!-- SLIDE 10: VISUAL CARDS -->
+<div class="slide s-con" data-n="10">
+  <div class="s-hd"><div class="stag en">Data Visualization</div><div class="stag es">Visualizaci&#xF3;n de Datos</div>
+    <h2 class="en">Visual Cards &#x2014; Know When to Use Which</h2><h2 class="es">Tarjetas Visuales &#x2014; Cu&#xE1;ndo Usar Cada Una</h2>
+    <div class="sd en">Joule picks the best card type automatically &#x2014; or be explicit in your prompt.</div>
+    <div class="sd es">Joule elige el mejor tipo de tarjeta autom&#xE1;ticamente &#x2014; o s&#xE9; expl&#xED;cito en tu prompt.</div>
+  </div>
+  <div class="s-bd">
+    <div class="tw en"><table><thead><tr><th>Type</th><th>Best For</th><th>Example</th><th>Size</th></tr></thead><tbody>
+      <tr><td>&#x1F4CA; KPI<br><small style="font-weight:400;color:#999">1&#x2013;4 metrics</small></td><td>Headline numbers at a glance &#x2014; pipeline value, open tickets</td><td>Total open PRs, overdue tasks, emails awaiting reply</td><td>S</td></tr>
+      <tr><td>&#x1F4CB; Table<br><small style="font-weight:400;color:#999">3+ rows</small></td><td>Comparing or scanning multiple items with the same fields</td><td>Jira issues with priority, assignee, and status</td><td>L</td></tr>
+      <tr><td>&#x1F4C8; Chart<br><small style="font-weight:400;color:#999">Trends</small></td><td>Values over time or distribution by category</td><td>Monthly email volume, ticket counts by category</td><td>L</td></tr>
+      <tr><td>&#x1F50D; Detail<br><small style="font-weight:400;color:#999">1 item</small></td><td>Deep-dive into one record &#x2014; every attribute visible</td><td>Full details of one Jira ticket: ID, description, due date</td><td>M</td></tr>
+      <tr><td>&#x1F4CC; Object List<br><small style="font-weight:400;color:#999">1&#x2013;5 items</small></td><td>Rich items needing visual emphasis &#x2014; badges, avatars, status</td><td>Top 5 escalations with priority badge and days overdue</td><td>M</td></tr>
+      <tr><td>&#x1F4DD; Text<br><small style="font-weight:400;color:#999">Prose</small></td><td>Summaries, notes, or explanations without tabular structure</td><td>Meeting prep brief or report summary with headings</td><td>M&#x2013;XL</td></tr>
+    </tbody></table></div>
+    <div class="tw es"><table><thead><tr><th>Tipo</th><th>Ideal Para</th><th>Ejemplo</th><th>Tama&#xF1;o</th></tr></thead><tbody>
+      <tr><td>&#x1F4CA; KPI</td><td>N&#xFA;meros clave de un vistazo &#x2014; pipeline, tickets abiertos</td><td>PRs abiertos, tareas vencidas, emails sin respuesta</td><td>S</td></tr>
+      <tr><td>&#x1F4CB; Tabla</td><td>Comparar m&#xFA;ltiples &#xED;tems con los mismos campos</td><td>Issues Jira con prioridad, asignado y estado</td><td>L</td></tr>
+      <tr><td>&#x1F4C8; Gr&#xE1;fico</td><td>Valores en el tiempo o distribuci&#xF3;n por categor&#xED;a</td><td>Volumen mensual de emails, tickets por categor&#xED;a</td><td>L</td></tr>
+      <tr><td>&#x1F50D; Detalle</td><td>An&#xE1;lisis profundo de un registro &#x2014; todos sus atributos</td><td>Detalles completos de un ticket Jira</td><td>M</td></tr>
+      <tr><td>&#x1F4CC; Lista Objetos</td><td>&#xCD;tems con &#xE9;nfasis visual &#x2014; badges, avatares, estado</td><td>Top 5 escalaciones con badge de prioridad</td><td>M</td></tr>
+      <tr><td>&#x1F4DD; Texto</td><td>Res&#xFA;menes o explicaciones sin estructura tabular</td><td>Brief de reuni&#xF3;n o resumen de reporte</td><td>M&#x2013;XL</td></tr>
+    </tbody></table></div>
+    <div class="ibox mt8"><p class="en">&#x1F4A1; Enable via <strong>settings icon &#x2192; Visual Cards</strong> in the chat toolbar. Be explicit in prompts: <em>"show this as a KPI card"</em>, <em>"give me a table"</em>, <em>"chart this as a bar chart"</em>. Cards can be added to a Space for persistent monitoring.</p>
+    <p class="es">&#x1F4A1; Activar via <strong>ic&#xF3;no de configuraci&#xF3;n &#x2192; Visual Cards</strong> en el toolbar del chat. S&#xE9; expl&#xED;cito: <em>"mostr&#xE1; esto como KPI"</em>, <em>"dame una tabla"</em>, <em>"grafic&#xE1; esto como gr&#xE1;fico de barras"</em>. Las tarjetas se pueden agregar a un Space.</p></div>
+  </div>
+</div>
+
+<!-- SLIDE 11: CONNECTORS -->
+<div class="slide s-con" data-n="11">
+  <div class="s-hd dk"><div class="stag en">Extensions</div><div class="stag es">Extensiones</div>
+    <h2 class="en">Connectors &#x2014; Connect Live to External Systems</h2><h2 class="es">Conectores &#x2014; Conexi&#xF3;n en Vivo con Sistemas Externos</h2>
+    <div class="sd en">A Connector gives Joule the ability to read or act on an external system during a conversation.</div>
+    <div class="sd es">Un Conector le da a Joule la capacidad de leer o actuar sobre un sistema externo durante una conversaci&#xF3;n.</div>
+  </div>
+  <div class="s-bd">
+    <div class="ibox"><div class="ibt en">What is a Connector?</div><div class="ibt es">&#xBF;Qu&#xE9; es un Conector?</div>
+    <p class="en">A live integration between Joule Work Desktop and an external system &#x2014; SharePoint, a database, Jira, SAP systems. Under the hood, it uses the <strong>Model Context Protocol (MCP)</strong> &#x2014; an open standard for AI assistants to communicate securely with external services.</p>
+    <p class="es">Una integraci&#xF3;n en vivo entre Joule Work Desktop y un sistema externo &#x2014; SharePoint, una base de datos, Jira, sistemas SAP. Por dentro, usa el <strong>Model Context Protocol (MCP)</strong> &#x2014; un est&#xE1;ndar abierto para que los asistentes de IA se comuniquen de forma segura con servicios externos.</p></div>
+    <div class="g2 mt8">
+      <div class="card" style="border-left:4px solid #D0D0D0"><div class="ch"><span class="ico">&#x274C;</span><span class="en">Without a Connector</span><span class="es">Sin un Conector</span></div>
+        <p class="en">Joule <strong>cannot access live internal data.</strong> Ask for Q3 revenue without a Connector, and Joule will tell you it cannot access that data &#x2014; it only knows what you tell it in the prompt.</p>
+        <p class="es">Joule <strong>no puede acceder a datos internos en vivo.</strong> Pregunt&#xE1; por revenue del Q3 sin un Conector, y Joule te dir&#xE1; que no tiene acceso &#x2014; solo sabe lo que le dec&#xED;s en el prompt.</p></div>
+      <div class="card" style="border-left:4px solid var(--blue)"><div class="ch"><span class="ico">&#x2705;</span><span class="en">With a Connector</span><span class="es">Con un Conector</span></div>
+        <p class="en">Joule can <strong>query the connected system directly</strong> and return live data &#x2014; tables, charts, or summaries from real-time information. Examples: Jira issues, SharePoint documents, SAP system data.</p>
+        <p class="es">Joule puede <strong>consultar el sistema conectado directamente</strong> y devolver datos en vivo &#x2014; tablas, gr&#xE1;ficos o res&#xFA;menes en tiempo real. Ejemplos: issues Jira, documentos SharePoint, datos SAP.</p></div>
+    </div>
+    <div class="sh en">Available Connector Examples at SAP</div><div class="sh es">Ejemplos de Conectores Disponibles en SAP</div>
+    <div class="g3">
+      <div class="card"><div class="ch"><span class="ico">&#x1F6E0;&#xFE0F;</span>Jira</div><p class="en">Query issues, sprints, and project status. Pull open tickets into conversations or Space dashboards.</p><p class="es">Consultar issues, sprints y estado del proyecto. Traer tickets abiertos a conversaciones o dashboards.</p></div>
+      <div class="card"><div class="ch"><span class="ico">&#x1F517;</span>Knowledge@SAP / GCF</div><p class="en">Access SAP internal knowledge bases, GCF processes, documentation, and deal guidelines.</p><p class="es">Acceder a bases de conocimiento internas SAP, procesos GCF, documentaci&#xF3;n y gu&#xED;as de deals.</p></div>
+      <div class="card"><div class="ch"><span class="ico">&#x1F4C2;</span>SharePoint / ONE360</div><p class="en">Query SharePoint libraries or SAP customer data (ONE360) for account information, contracts, and opportunities.</p><p class="es">Consultar bibliotecas SharePoint o datos de clientes SAP (ONE360) para informaci&#xF3;n de cuentas, contratos y oportunidades.</p></div>
+    </div>
+    <div class="ibox gold mt8"><p class="en">&#x2699;&#xFE0F; <strong>How to add:</strong> Extensions &#x2192; + New &#x2192; Add Connector. Contact your IT team about which Connectors are approved. Activate via the connector icon in the chat toolbar.</p>
+    <p class="es">&#x2699;&#xFE0F; <strong>C&#xF3;mo agregar:</strong> Extensions &#x2192; + New &#x2192; Add Connector. Contact&#xE1; a IT sobre qu&#xE9; Conectores est&#xE1;n aprobados. Activar desde el ic&#xF3;no de conector en el toolbar del chat.</p></div>
+  </div>
+</div>
+
+<!-- SLIDE 12: SKILLS -->
+<div class="slide s-con" data-n="12">
+  <div class="s-hd dk"><div class="stag en">Extensions</div><div class="stag es">Extensiones</div>
+    <h2 class="en">Skills &#x2014; Teach Joule Your Workflows</h2><h2 class="es">Skills &#x2014; Ense&#xF1;ale tus Flujos de Trabajo a Joule</h2>
+    <div class="sd en">Skills are reusable instruction sets &#x2014; playbooks Joule follows automatically when triggered.</div>
+    <div class="sd es">Los Skills son conjuntos de instrucciones reutilizables &#x2014; playbooks que Joule sigue autom&#xE1;ticamente al activarse.</div>
+  </div>
+  <div class="s-bd">
+    <div class="ibox"><p class="en">Once created, Joule follows a Skill automatically when triggered. <strong>Skills eliminate repetitive prompting</strong> &#x2014; define the workflow once and reuse it indefinitely. A Skill can use Connectors, read local files, search the web, and chain multiple steps.</p>
+    <p class="es">Una vez creado, Joule sigue un Skill autom&#xE1;ticamente al activarse. <strong>Los Skills eliminan el prompting repetitivo</strong> &#x2014; defin&#xED;s el flujo una vez y lo reutiliz&#xE1;s indefinidamente. Un Skill puede usar Conectores, leer archivos, buscar en la web y encadenar pasos.</p></div>
+    <div class="g2 mt8">
+      <div class="card"><div class="ch"><span class="ico">&#x1F4D6;</span><span class="en">Examples of Skills You Might Create</span><span class="es">Ejemplos de Skills que Podr&#xED;as Crear</span></div>
+        <ul class="bl">
+          <li class="en">Weekly status report template for your team</li><li class="es">Plantilla de reporte de estado semanal para tu equipo</li>
+          <li class="en">GCF deal approval checklist &#x2014; tracks required fields before submission</li><li class="es">Checklist de aprobaci&#xF3;n de deals GCF &#x2014; verifica campos requeridos antes del env&#xED;o</li>
+          <li class="en">Prioritized inbox digest with reply links</li><li class="es">Digest priorizado del inbox con links de respuesta</li>
+          <li class="en">Client briefing prep &#x2014; emails + news + meeting agenda</li><li class="es">Preparaci&#xF3;n de briefing de cliente &#x2014; emails + noticias + agenda de reuni&#xF3;n</li>
+        </ul></div>
+      <div class="card"><div class="ch"><span class="ico">&#x1F6E0;&#xFE0F;</span><span class="en">How to Create a Skill</span><span class="es">C&#xF3;mo Crear un Skill</span></div>
+        <ol class="sl">
+          <li><span class="en">Say: <em>"Create a skill for [your task]"</em> &#x2014; Joule guides you through it.</span><span class="es">Dec&#xED;: <em>"Create a skill for [tu tarea]"</em> &#x2014; Joule te gu&#xED;a.</span></li>
+          <li><span class="en">Or: <strong>Extensions &#x2192; + New &#x2192; Add Skill &#x2192; Create with Joule Work Desktop.</strong></span><span class="es">O: <strong>Extensions &#x2192; + New &#x2192; Add Skill &#x2192; Create with Joule Work Desktop.</strong></span></li>
+          <li><span class="en">Or <strong>upload</strong> a SKILL.md file shared by a colleague from your team.</span><span class="es">O <strong>subir</strong> un archivo SKILL.md compartido por un colega de tu equipo.</span></li>
+        </ol></div>
+    </div>
+    <div class="ibox gold mt8"><div class="ibt en">&#x2B50; Pro Tip: Turn Your Best Prompt into a Skill</div><div class="ibt es">&#x2B50; Pro Tip: Convert&#xED; tu Mejor Prompt en un Skill</div>
+    <p class="en">Example Monday morning routine Skill: <em>"Summarise emails since Friday 5pm (focus: urgent + [Client Name]). Search web for top 3&#x2013;5 [Industry] headlines last 72h with one-sentence takeaway each. Draft a 30-min agenda for my 9am call with [Client]. Keep all sections brief &#x2014; I need to read this in under 5 minutes."</em></p>
+    <p class="es">Ejemplo de Skill de rutina del lunes: <em>"Resumir emails desde el viernes 5pm (foco: urgentes + [Cliente]). Buscar top 3&#x2013;5 titulares de [Industria] &#xFA;ltimas 72h con una frase por titular. Redactar agenda de 30 min para mi llamada de las 9am con [Cliente]. Breve &#x2014; necesito leerlo en menos de 5 minutos."</em></p></div>
+  </div>
+</div>
+
+<!-- SLIDE 13: EFFECTIVE PROMPTING -->
+<div class="slide s-con" data-n="13">
+  <div class="s-hd dk"><div class="stag en">Effective Prompting</div><div class="stag es">Prompts Efectivos</div>
+    <h2 class="en">How to Write Effective Prompts</h2><h2 class="es">C&#xF3;mo Escribir Prompts Efectivos</h2>
+    <div class="sd en">The difference between a useful and a useless response is almost always in the prompt.</div>
+    <div class="sd es">La diferencia entre una respuesta &#xFA;til e in&#xFA;til casi siempre est&#xE1; en el prompt.</div>
+  </div>
+  <div class="s-bd">
+    <div class="ibox"><div class="ibt en">The Context&#x2013;Goal&#x2013;Format Framework</div><div class="ibt es">El Framework Contexto&#x2013;Objetivo&#x2013;Formato</div>
+    <p class="en">Every great prompt has three elements. Include all three and Joule will give you a <strong>specific, actionable, well-structured output &#x2014; every time.</strong></p>
+    <p class="es">Todo buen prompt tiene tres elementos. Incluilos todos y Joule te dar&#xE1; un <strong>resultado espec&#xED;fico, accionable y bien estructurado &#x2014; siempre.</strong></p></div>
+    <div class="cgf">
+      <div class="cgf-card ctx"><div class="cgf-letter">C</div>
+        <div class="cgf-title en">Context</div><div class="cgf-title es">Contexto</div>
+        <div class="cgf-desc en">Who you are, your task, and any constraints to help Joule tailor its response.</div>
+        <div class="cgf-desc es">Qui&#xE9;n sos, tu tarea y cualquier restricci&#xF3;n para que Joule adapte su respuesta.</div>
+        <div class="cgf-ex en">"I am a CBP preparing for a deal approval meeting on a $2M RISE deal."</div>
+        <div class="cgf-ex es">"Soy un CBP preparando una reuni&#xF3;n de aprobaci&#xF3;n de deal por $2M RISE."</div></div>
+      <div class="cgf-card goal"><div class="cgf-letter">G</div>
+        <div class="cgf-title en">Goal</div><div class="cgf-title es">Objetivo</div>
+        <div class="cgf-desc en">Exactly what you want Joule to do &#x2014; specific and actionable.</div>
+        <div class="cgf-desc es">Exactamente qu&#xE9; quer&#xE9;s que haga Joule &#x2014; espec&#xED;fico y accionable.</div>
+        <div class="cgf-ex en">"Draft a 5-item checklist to verify the deal is ready for approval."</div>
+        <div class="cgf-ex es">"Redact&#xE1; un checklist de 5 &#xED;tems para verificar que el deal est&#xE1; listo para aprobaci&#xF3;n."</div></div>
+      <div class="cgf-card fmt"><div class="cgf-letter">F</div>
+        <div class="cgf-title en">Format</div><div class="cgf-title es">Formato</div>
+        <div class="cgf-desc en">How you want the output structured &#x2014; list, table, prose, bullets.</div>
+        <div class="cgf-desc es">C&#xF3;mo quer&#xE9;s que se estructure el resultado &#x2014; lista, tabla, prosa, bullets.</div>
+        <div class="cgf-ex en">"Return as a numbered list with one sentence of rationale per item."</div>
+        <div class="cgf-ex es">"Dev&#xF3;lvelo como lista numerada con una oraci&#xF3;n de justificaci&#xF3;n por &#xED;tem."</div></div>
+    </div>
+    <div class="ibox green mt8"><div class="ibt en">Combined Example &#x2014; The Good Prompt:</div><div class="ibt es">Ejemplo Combinado &#x2014; El Buen Prompt:</div>
+    <p><em class="en">"I am a CBP preparing for a deal approval meeting on a $2M RISE deal. Draft a 5-item checklist to verify the deal is ready for approval. Return as a numbered list with one sentence of rationale per item."</em></p>
+    <p><em class="es">"Soy un CBP preparando una reuni&#xF3;n de aprobaci&#xF3;n de deal por $2M RISE. Redact&#xE1; un checklist de 5 &#xED;tems para verificar que est&#xE1; listo. Dev&#xF3;lvelo como lista numerada con una oraci&#xF3;n de justificaci&#xF3;n por &#xED;tem."</em></p></div>
+    <div class="ibox mt8"><p class="en">&#x1F4A1; <strong>Personal Instructions:</strong> In Settings &#x2192; Personalization, add a <strong>Role Description</strong> (who you are, your team) and <strong>Personal Instructions</strong> (tone, language, format preferences). Joule applies these automatically to every conversation &#x2014; no need to repeat context each time.</p>
+    <p class="es">&#x1F4A1; <strong>Instrucciones Personales:</strong> En Settings &#x2192; Personalizaci&#xF3;n, agreg&#xE1; una <strong>Descripci&#xF3;n de Rol</strong> (qui&#xE9;n sos, tu equipo) e <strong>Instrucciones Personales</strong> (tono, idioma, formato). Joule las aplica autom&#xE1;ticamente en cada conversaci&#xF3;n &#x2014; no ten&#xE9;s que repetir contexto.</p></div>
+  </div>
+</div>
+
+<!-- SLIDE 14: USE CASES -->
+<div class="slide s-con" data-n="14">
+  <div class="s-hd dk"><div class="stag en">Real-World Use Cases</div><div class="stag es">Casos de Uso Reales</div>
+    <h2 class="en">5 Real-World Use Cases</h2><h2 class="es">5 Casos de Uso Reales</h2>
+    <div class="sd en">How SAP employees use Joule Work Desktop in their daily work.</div>
+    <div class="sd es">C&#xF3;mo los empleados de SAP usan Joule Work Desktop en su trabajo diario.</div>
+  </div>
+  <div class="s-bd">
+    <div class="ucg">
+      <div class="uc"><div class="uc-who">Kelly &#x2014; <span class="en">Account Executive</span><span class="es">Ejecutiva de Cuentas</span></div>
+        <div class="uc-task en">&#x1F4E7; Summarise emails before a meeting</div><div class="uc-task es">&#x1F4E7; Resumir emails antes de una reuni&#xF3;n</div>
+        <div class="uc-desc en">By connecting her work email, Kelly asks Joule to identify and summarise key communications for her upcoming meeting &#x2014; arriving well-informed without spending 30 minutes in the inbox.</div>
+        <div class="uc-desc es">Conectando su email de trabajo, Kelly le pide a Joule que identifique y resuma las comunicaciones clave para su pr&#xF3;xima reuni&#xF3;n &#x2014; llega bien informada sin pasar 30 minutos en el inbox.</div></div>
+      <div class="uc"><div class="uc-who">Frank &#x2014; <span class="en">Sales Executive</span><span class="es">Ejecutivo de Ventas</span></div>
+        <div class="uc-task en">&#x1F50D; Research any topic with cited results</div><div class="uc-task es">&#x1F50D; Investigar cualquier tema con resultados citados</div>
+        <div class="uc-desc en">Instead of a list of links, Frank gets concise summaries with key takeaways and sources on industry trends, competitor updates, or specific business insights &#x2014; directly in his workflow.</div>
+        <div class="uc-desc es">En lugar de una lista de links, Frank recibe res&#xFA;menes concisos con puntos clave y fuentes sobre tendencias del sector o insights de negocio &#x2014; directamente en su flujo de trabajo.</div></div>
+      <div class="uc"><div class="uc-who">Priya &#x2014; <span class="en">Project Manager</span><span class="es">Gerente de Proyecto</span></div>
+        <div class="uc-task en">&#x270D;&#xFE0F; Draft emails and documents from notes</div><div class="uc-task es">&#x270D;&#xFE0F; Redactar emails y documentos desde notas</div>
+        <div class="uc-desc en">Priya provides bullet points and specifies tone, and Joule transforms them into polished drafts &#x2014; follow-up emails, project updates, or detailed reports &#x2014; saving time and ensuring consistency.</div>
+        <div class="uc-desc es">Priya proporciona sus puntos clave y especifica el tono, y Joule los transforma en borradores pulidos &#x2014; emails de seguimiento, actualizaciones de proyecto o reportes detallados.</div></div>
+      <div class="uc"><div class="uc-who">Philipp &#x2014; <span class="en">Team Lead</span><span class="es">L&#xED;der de Equipo</span></div>
+        <div class="uc-task en">&#x1F501; Automate repeating workflows with Skills</div><div class="uc-task es">&#x1F501; Automatizar flujos repetitivos con Skills</div>
+        <div class="uc-desc en">Philipp creates Skills that streamline recurring tasks like weekly reporting or data analysis &#x2014; reducing manual effort so he can focus on strategic work.</div>
+        <div class="uc-desc es">Philipp crea Skills que optimizan tareas recurrentes como reportes semanales o an&#xE1;lisis de datos &#x2014; reduciendo el trabajo manual para enfocarse en actividades estrat&#xE9;gicas.</div></div>
+    </div>
+    <div class="card mt12"><div class="ch"><span class="ico">&#x1F4C2;</span>Maxyne &#x2014; <span class="en">Senior Analyst</span><span class="es">Analista Senior</span>&nbsp;<em style="font-size:12px;font-weight:400;color:var(--text2)" class="en">Analyse files and run scripts</em><em style="font-size:12px;font-weight:400;color:var(--text2)" class="es">Analizar archivos y ejecutar scripts</em></div>
+    <p class="en">Maxyne uses Joule to analyse spreadsheets, PDFs, and documents to extract insights or identify trends. She also runs Python scripts on files for advanced data manipulation &#x2014; Joule writes the script, asks for approval, then executes it.</p>
+    <p class="es">Maxyne usa Joule para analizar planillas, PDFs y documentos, extraer insights o identificar tendencias. Tambi&#xE9;n ejecuta scripts de Python en archivos &#x2014; Joule escribe el script, pide aprobaci&#xF3;n y lo ejecuta.</p></div>
+  </div>
+</div>
+
+<!-- SLIDE 15: JOULE vs COPILOT vs CLAUDE CODE -->
+<div class="slide s-con" data-n="15">
+  <div class="s-hd dk"><div class="stag en">Tool Comparison</div><div class="stag es">Comparaci&#xF3;n de Herramientas</div>
+    <h2 class="en">Joule vs Microsoft Copilot vs Claude Code</h2><h2 class="es">Joule vs Microsoft Copilot vs Claude Code</h2>
+    <div class="sd en">These tools are complementary, not competing. Each serves a distinct purpose.</div>
+    <div class="sd es">Estas herramientas son complementarias, no competidoras. Cada una sirve un prop&#xF3;sito distinto.</div>
+  </div>
+  <div class="s-bd">
+    <div class="ibox"><p class="en">As a typical SAP employee, you will likely encounter all three. <strong>AI tools evolve fast &#x2014; treat this as a current snapshot, not a fixed map.</strong></p>
+    <p class="es">Como empleado t&#xED;pico de SAP, probablemente te encuentres con las tres. <strong>Las herramientas de IA evolucionan r&#xE1;pido &#x2014; trat&#xE1; esto como un snapshot actual, no un mapa fijo.</strong></p></div>
+    <div class="tw mt8 sm-table"><table>
+      <thead><tr><th></th><th>Microsoft Copilot</th><th>Claude Code</th><th>Joule Work Desktop</th></tr></thead>
+      <tbody>
+        <tr><td class="en">What it does</td><td class="es">Qu&#xE9; hace</td>
+          <td class="en">AI productivity within Microsoft 365 apps</td><td class="es">Productividad con IA dentro de apps Microsoft 365</td>
+          <td class="en">Agentic coding &#x2014; delegates whole engineering tasks (features, refactors, tests) using natural language</td><td class="es">Coding ag&#xE9;ntico &#x2014; delega tareas de ingenier&#xED;a completas usando lenguaje natural</td>
+          <td class="en">Agentic task execution, email &amp; calendar integration, file work, web research, Skills &amp; Connectors</td><td class="es">Ejecuci&#xF3;n ag&#xE9;ntica, integraci&#xF3;n email y calendario, trabajo con archivos, investigaci&#xF3;n web, Skills y Conectores</td></tr>
+        <tr><td class="en">Where it lives</td><td class="es">D&#xF3;nde vive</td>
+          <td class="en">Embedded in Word, Excel, Teams, Outlook</td><td class="es">Integrado en Word, Excel, Teams, Outlook</td>
+          <td class="en">Terminal (CLI) + VS Code &amp; JetBrains IDE integrations</td><td class="es">Terminal (CLI) + integraciones VS Code y JetBrains</td>
+          <td class="en">Standalone desktop app (Windows / macOS)</td><td class="es">App de escritorio independiente (Windows / macOS)</td></tr>
+        <tr><td class="en">Best for</td><td class="es">Mejor para</td>
+          <td class="en">Working inside Office documents and Teams channels</td><td class="es">Trabajar dentro de documentos Office y canales Teams</td>
+          <td class="en">Software development: writing, testing, and reviewing code across entire codebases</td><td class="es">Desarrollo de software: escribir, testear y revisar c&#xF3;digo en codebases completos</td>
+          <td class="en">Business workflows, document analysis, automation, external system connection, research</td><td class="es">Flujos de negocio, an&#xE1;lisis de documentos, automatizaci&#xF3;n, conexi&#xF3;n con sistemas externos, investigaci&#xF3;n</td></tr>
+      </tbody>
+    </table></div>
+    <div class="ibox green mt8"><p class="en">&#x2705; <strong>Bottom line:</strong> Joule Work Desktop is <em>not a replacement</em> for Copilot or Claude Code. Copilot lives inside Office apps; Claude Code lives in the terminal. Joule is your <strong>general-purpose AI workspace for everyday business tasks</strong> &#x2014; connected to your files, your email, and the web.</p>
+    <p class="es">&#x2705; <strong>Conclusi&#xF3;n:</strong> Joule Work Desktop <em>no reemplaza</em> a Copilot ni a Claude Code. Copilot vive dentro de apps Office; Claude Code vive en la terminal. Joule es tu <strong>espacio de trabajo de IA de prop&#xF3;sito general para tareas de negocio diarias</strong> &#x2014; conectado a tus archivos, tu email y la web.</p></div>
+  </div>
+</div>
+
+<!-- SLIDE 16: DATA PRIVACY RULES -->
+<div class="slide s-con" data-n="16">
+  <div class="s-hd"><div class="stag en">Data Privacy</div><div class="stag es">Privacidad de Datos</div>
+    <h2 class="en">What Data Can You Enter? &#x2014; Category Rules</h2><h2 class="es">&#xBF;Qu&#xE9; Datos Pod&#xE9;s Ingresar? &#x2014; Reglas por Categor&#xED;a</h2>
+    <div class="sd en">These rules apply every time you write a prompt. When in doubt, leave it out.</div>
+    <div class="sd es">Estas reglas aplican cada vez que escrib&#xED;s un prompt. Ante la duda, no lo incluyas.</div>
+  </div>
+  <div class="s-bd">
+    <div class="dg">
+      <div class="dc do"><div class="dc-t">&#x2705; <span class="en">Customer &amp; Partner Data &#x2014; ALLOWED</span><span class="es">Datos de Clientes y Partners &#x2014; PERMITIDO</span></div>
+        <div class="do-item"><span class="do-icon">&#x2713;</span><span class="en">Personal data (names, emails) only when directly needed for a specific work task</span><span class="es">Datos personales solo cuando sean directamente necesarios para una tarea espec&#xED;fica</span></div>
+        <div class="do-item"><span class="do-icon">&#x2713;</span><span class="en">Anonymised descriptions &#x2014; e.g. "a retail customer in EMEA"</span><span class="es">Descripciones anonimizadas &#x2014; ej. "un cliente retail en EMEA"</span></div></div>
+      <div class="dc dont"><div class="dc-t">&#x274C; <span class="en">Customer &amp; Partner Data &#x2014; NOT ALLOWED</span><span class="es">Datos de Clientes y Partners &#x2014; NO PERMITIDO</span></div>
+        <div class="dont-item"><span class="dont-icon">&#x2717;</span><span class="en">Personal data in bulk or without clear task-related purpose (violates GDPR)</span><span class="es">Datos personales en masa o sin finalidad espec&#xED;fica (viola el GDPR)</span></div>
+        <div class="dont-item"><span class="dont-icon">&#x2717;</span><span class="en">Partner or customer confidential documents or commercial terms</span><span class="es">Documentos confidenciales o t&#xE9;rminos comerciales de partners o clientes</span></div></div>
+      <div class="dc do"><div class="dc-t">&#x2705; <span class="en">Employee Data &#x2014; ALLOWED</span><span class="es">Datos de Empleados &#x2014; PERMITIDO</span></div>
+        <div class="do-item"><span class="do-icon">&#x2713;</span><span class="en">Generic role descriptions &#x2014; e.g. "a senior consultant on my team"</span><span class="es">Descripciones de rol gen&#xE9;ricas &#x2014; ej. "un consultor senior de mi equipo"</span></div></div>
+      <div class="dc dont"><div class="dc-t">&#x274C; <span class="en">Employee Data &#x2014; NOT ALLOWED</span><span class="es">Datos de Empleados &#x2014; NO PERMITIDO</span></div>
+        <div class="dont-item"><span class="dont-icon">&#x2717;</span><span class="en">Individual performance ratings, compensation, or health information</span><span class="es">Calificaciones de desempe&#xF1;o individual, compensaci&#xF3;n o informaci&#xF3;n de salud</span></div>
+        <div class="dont-item"><span class="dont-icon">&#x2717;</span><span class="en">Promotion or disciplinary documentation</span><span class="es">Documentaci&#xF3;n de promociones o medidas disciplinarias</span></div></div>
+      <div class="dc do"><div class="dc-t">&#x2705; <span class="en">SAP Internal &amp; Financial &#x2014; ALLOWED</span><span class="es">SAP Interno y Financiero &#x2014; PERMITIDO</span></div>
+        <div class="do-item"><span class="do-icon">&#x2713;</span><span class="en">SAP Internal content for legitimate work purposes</span><span class="es">Contenido SAP Internal para fines laborales leg&#xED;timos</span></div></div>
+      <div class="dc dont"><div class="dc-t">&#x274C; <span class="en">SAP Internal &amp; Financial &#x2014; NOT ALLOWED</span><span class="es">SAP Interno y Financiero &#x2014; NO PERMITIDO</span></div>
+        <div class="dont-item"><span class="dont-icon">&#x2717;</span><span class="en">SAP unreleased financial results, M&amp;A targets, or board-level strategy</span><span class="es">Resultados financieros no publicados, objetivos de M&amp;A o estrategia de directorio</span></div>
+        <div class="dont-item"><span class="dont-icon">&#x2717;</span><span class="en">SAP Restricted or SAP Confidential content (unless legal/compliance confirmed)</span><span class="es">Contenido SAP Restricted o SAP Confidential (salvo confirmaci&#xF3;n legal)</span></div></div>
+      <div class="dc do"><div class="dc-t">&#x2705; <span class="en">Credentials &amp; Technical &#x2014; ALLOWED</span><span class="es">Credenciales y T&#xE9;cnico &#x2014; PERMITIDO</span></div>
+        <div class="do-item"><span class="do-icon">&#x2713;</span><span class="en">Generic system names &#x2014; e.g. "our S/4HANA instance"</span><span class="es">Nombres gen&#xE9;ricos de sistemas &#x2014; ej. "nuestra instancia S/4HANA"</span></div></div>
+      <div class="dc dont"><div class="dc-t">&#x274C; <span class="en">Credentials &amp; Technical &#x2014; NOT ALLOWED</span><span class="es">Credenciales y T&#xE9;cnico &#x2014; NO PERMITIDO</span></div>
+        <div class="dont-item"><span class="dont-icon">&#x2717;</span><span class="en">SAP system credentials, API keys, access tokens, or passwords</span><span class="es">Credenciales de sistemas SAP, API keys, tokens de acceso o contrase&#xF1;as</span></div>
+        <div class="dont-item"><span class="dont-icon">&#x2717;</span><span class="en">Security certificates or private configuration data</span><span class="es">Certificados de seguridad o datos privados de configuraci&#xF3;n</span></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 17: EMPLOYEE DATA PROHIBITED USES -->
+<div class="slide s-con" data-n="17">
+  <div class="s-hd" style="background:var(--red)"><div class="stag en">Employee Data</div><div class="stag es">Datos de Empleados</div>
+    <h2 class="en">7 Prohibited Uses &#x2014; Employee-Related Requests</h2><h2 class="es">7 Usos Prohibidos &#x2014; Solicitudes sobre Empleados</h2>
+    <div class="sd en">Requests related to evaluating employees are not permitted under SAP policy.</div>
+    <div class="sd es">Las solicitudes relacionadas con la evaluaci&#xF3;n de empleados no est&#xE1;n permitidas seg&#xFA;n la pol&#xED;tica de SAP.</div>
+  </div>
+  <div class="s-bd">
+    <div class="ibox red"><div class="ibt">&#x26D4; <span class="en">These uses are impermissible:</span><span class="es">Estos usos est&#xE1;n prohibidos:</span></div></div>
+    <div class="tw mt8"><table><thead><tr><th>#</th><th class="en">Prohibited Use</th><th class="es">Uso Prohibido</th></tr></thead><tbody>
+      <tr><td>1</td><td class="en">Creating prompts to assess the performance or behavior of colleagues or team members</td><td class="es">Crear prompts para evaluar el desempe&#xF1;o o comportamiento de colegas o miembros del equipo</td></tr>
+      <tr><td>2</td><td class="en">Selecting employees, including decisions based on social criteria</td><td class="es">Seleccionar empleados, incluidas decisiones basadas en criterios sociales</td></tr>
+      <tr><td>3</td><td class="en">Profiling and recruiting processes</td><td class="es">Procesos de perfilado y reclutamiento</td></tr>
+      <tr><td>4</td><td class="en">Salary determination and compensation adjustment processes</td><td class="es">Determinaci&#xF3;n de salarios y procesos de ajuste de compensaci&#xF3;n</td></tr>
+      <tr><td>5</td><td class="en">Analysing and documenting working hours and attendance records</td><td class="es">Analizar y documentar horas de trabajo y registros de asistencia</td></tr>
+      <tr><td>6</td><td class="en">Tracking actual physical locations of employees</td><td class="es">Rastrear las ubicaciones f&#xED;sicas reales de los empleados</td></tr>
+      <tr><td>7</td><td class="en">Conducting compliance or internal investigations</td><td class="es">Realizar investigaciones de cumplimiento o investigaciones internas</td></tr>
+    </tbody></table></div>
+    <div class="ibox red mt8"><div class="ibt">&#x26A0;&#xFE0F; <span class="en">Important</span><span class="es">Importante</span></div>
+    <p class="en">Results from impermissible applications <strong>must not be used for employment law measures or performance assessments and must be discarded.</strong> The <strong>need-to-know principle</strong> always applies: information may only be viewed or shared by people who actually need it for their professional tasks.</p>
+    <p class="es">Los resultados de aplicaciones no permitidas <strong>no deben usarse para medidas de derecho laboral ni para evaluaciones de desempe&#xF1;o, y deben descartarse.</strong> El <strong>principio de necesidad de saber</strong> siempre aplica: la informaci&#xF3;n solo puede ser vista o compartida por personas que realmente la necesitan.</p></div>
+  </div>
+</div>
+
+<!-- SLIDE 18: AI LIMITATIONS & RESPONSIBLE AI -->
+<div class="slide s-con" data-n="18">
+  <div class="s-hd"><div class="stag en">AI Limitations &amp; Responsible Use</div><div class="stag es">Limitaciones e IA Responsable</div>
+    <h2 class="en">AI Limitations &amp; Responsible AI Usage</h2><h2 class="es">Limitaciones de la IA y Uso Responsable</h2>
+    <div class="sd en">Know the limitations. Follow the guidelines. Joule is only as responsible as the person using it.</div>
+    <div class="sd es">Con&#xF3;ce las limitaciones. Segu&#xED; las directrices. Joule es tan responsable como la persona que lo usa.</div>
+  </div>
+  <div class="s-bd">
+    <div class="ibox red"><div class="ibt">&#x26A0;&#xFE0F; <span class="en">Joule uses AI. Always verify important outputs.</span><span class="es">Joule usa IA. Siempre verific&#xE1; los resultados importantes.</span></div>
+    <p class="en">For facts, statistics, citations, or any output you plan to use in a high-stakes context: <strong>click through to the source, confirm the figure, and use your own judgment.</strong> Joule can cite a source incorrectly even when it sounds authoritative.</p>
+    <p class="es">Para hechos, estad&#xED;sticas, citas o cualquier resultado que vayas a usar en un contexto de alto impacto: <strong>verific&#xE1; la fuente, confirm&#xE1; el dato y us&#xE1; tu propio criterio.</strong> Joule puede citar una fuente incorrectamente aunque suene con autoridad.</p></div>
+    <div class="g2 mt8">
+      <div class="card"><div class="ch"><span class="ico">&#x1F50C;</span><span class="en">No Live Data Without Connector</span><span class="es">Sin Datos en Vivo Sin Conector</span></div>
+        <p class="en">Joule cannot access SAP systems, internal databases, or live financial data <strong>unless a Connector is configured.</strong> Always configure a Connector for tasks requiring live internal data.</p>
+        <p class="es">Joule no puede acceder a sistemas SAP, bases de datos internas o datos financieros en vivo <strong>a menos que se configure un Conector.</strong> Configur&#xE1; siempre un Conector para tareas que requieran datos internos en vivo.</p></div>
+      <div class="card"><div class="ch"><span class="ico">&#x1F9E0;</span><span class="en">No Persistent Memory Across Sessions</span><span class="es">Sin Memoria Persistente Entre Sesiones</span></div>
+        <p class="en">Joule does not retain memory of previous conversations by default. <strong>Each new session starts without context from prior interactions.</strong> If continuity is needed, manually provide the relevant context.</p>
+        <p class="es">Joule no retiene memoria de conversaciones anteriores. <strong>Cada sesi&#xF3;n nueva comienza sin contexto previo.</strong> Si necesit&#xE1;s continuidad, proporcion&#xE1; manualmente el contexto relevante.</p></div>
+      <div class="card"><div class="ch"><span class="ico">&#x1F914;</span><span class="en">Confident but Sometimes Wrong</span><span class="es">Seguro pero a Veces Incorrecto</span></div>
+        <p class="en">Joule may present inaccurate information <strong>with the same confidence as accurate responses.</strong> For high-stakes decisions, always cross-check information before acting on it.</p>
+        <p class="es">Joule puede presentar informaci&#xF3;n inexacta <strong>con la misma confianza que las respuestas precisas.</strong> Para decisiones importantes, siempre verific&#xE1; la informaci&#xF3;n antes de actuar.</p></div>
+      <div class="card"><div class="ch"><span class="ico">&#x1F6E1;&#xFE0F;</span><span class="en">No Autonomous Action Without Approval</span><span class="es">Sin Acci&#xF3;n Aut&#xF3;noma Sin Aprobaci&#xF3;n</span></div>
+        <p class="en">Joule <strong>will not write, edit, or execute anything without your explicit approval.</strong> Every action dialog shows exactly what will happen before you confirm. Never skip the approval dialog.</p>
+        <p class="es">Joule <strong>no escribir&#xE1;, editar&#xE1; ni ejecutar&#xE1; nada sin tu aprobaci&#xF3;n expl&#xED;cita.</strong> Cada di&#xE1;logo de acci&#xF3;n muestra exactamente qu&#xE9; va a pasar antes de confirmar. Nunca saltees el di&#xE1;logo.</p></div>
+    </div>
+    <div class="g2 mt8">
+      <div class="card"><div class="ch"><span class="ico">&#x2705;</span><span class="en">What You CAN Do</span><span class="es">Qu&#xE9; Pod&#xE9;s Hacer</span></div>
+        <ul class="bl">
+          <li class="en">Summarise emails, draft documents, and analyse work files</li><li class="es">Resumir emails, redactar documentos y analizar archivos de trabajo</li>
+          <li class="en">Use web search for publicly available information (results are cited)</li><li class="es">Usar b&#xFA;squeda web para informaci&#xF3;n p&#xFA;blica (resultados son citados)</li>
+          <li class="en">Install SAP-approved Skills and MCP Connectors</li><li class="es">Instalar Skills y Conectores MCP aprobados por SAP</li>
+          <li class="en">Treat Joule's output as a starting point &#x2014; verify before acting on critical decisions</li><li class="es">Tratar la salida de Joule como punto de partida &#x2014; verificar antes de decisiones cr&#xED;ticas</li>
+        </ul></div>
+      <div class="card"><div class="ch"><span class="ico">&#x274C;</span><span class="en">What You Should NOT Do</span><span class="es">Qu&#xE9; NO Deb&#xE9;s Hacer</span></div>
+        <ul class="bl">
+          <li class="en">Do not share confidential customer data, personal data, or SAP trade secrets in prompts</li><li class="es">No compartas datos confidenciales de clientes, datos personales ni secretos comerciales de SAP en prompts</li>
+          <li class="en">Do not use Joule to make final decisions without human review</li><li class="es">No uses Joule para tomar decisiones finales sin revisi&#xF3;n humana</li>
+          <li class="en">Do not bypass approval dialogs &#x2014; they protect you from unintended actions</li><li class="es">No elud&#xE1;s los di&#xE1;logos de aprobaci&#xF3;n &#x2014; te protegen de acciones no deseadas</li>
+        </ul></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 19: SECURITY ARCHITECTURE -->
+<div class="slide s-con" data-n="19">
+  <div class="s-hd"><div class="stag en">Privacy &amp; Trust</div><div class="stag es">Privacidad y Confianza</div>
+    <h2 class="en">Secure Architecture of Joule Work Desktop</h2><h2 class="es">Arquitectura Segura de Joule Work Desktop</h2>
+    <div class="sd en">Local-first, privacy-preserving. Here is exactly how your data is protected at every layer.</div>
+    <div class="sd es">Local-first, preservaci&#xF3;n de privacidad. As&#xED; se protegen tus datos en cada capa.</div>
+  </div>
+  <div class="s-bd">
+    <div class="sg">
+      <div class="sc"><div class="sc-t">&#x1F510; AES-256 Local Encryption</div>
+        <div class="sc-d en">All conversations are stored on your device in an AES-256 encrypted database. The encryption key is in your OS keychain &#x2014; never in plain text.</div>
+        <div class="sc-d es">Todas las conversaciones se almacenan en tu dispositivo en una base de datos encriptada AES-256. La clave est&#xE1; en el keychain del SO &#x2014; nunca en texto plano.</div></div>
+      <div class="sc"><div class="sc-t">&#x1F4C1; Sandboxed File Access</div>
+        <div class="sc-d en">Joule can only access files inside your designated working directory. It cannot read, write, or list files outside this boundary &#x2014; your Desktop and Documents are untouched.</div>
+        <div class="sc-d es">Joule solo puede acceder a archivos dentro de tu directorio de trabajo. No puede leer, escribir ni listar archivos fuera de ese l&#xED;mite.</div></div>
+      <div class="sc"><div class="sc-t">&#x1F3A4; On-Device Voice Processing</div>
+        <div class="sc-d en">All speech-to-text happens locally (~466 MB model). Audio is never transmitted anywhere &#x2014; not to SAP, not to Anthropic, not anywhere.</div>
+        <div class="sc-d es">Todo el reconocimiento de voz ocurre localmente (~466 MB de modelo). El audio nunca se transmite a ning&#xFA;n lugar &#x2014; ni a SAP, ni a Anthropic.</div></div>
+      <div class="sc"><div class="sc-t">&#x1F511; Secure Token Storage</div>
+        <div class="sc-d en">OAuth tokens (Microsoft 365, MCP) and API credentials are stored using OS-level secure storage &#x2014; never in plain-text files or logs.</div>
+        <div class="sc-d es">Los tokens OAuth y credenciales API se almacenan en el almacenamiento seguro del SO &#x2014; nunca en archivos de texto plano o logs.</div></div>
+      <div class="sc"><div class="sc-t">&#x2705; Approval-Gated Actions</div>
+        <div class="sc-d en">Joule always asks for your explicit approval before writing files or executing commands. You see exactly what will happen before confirming &#x2014; every single time.</div>
+        <div class="sc-d es">Joule siempre pide tu aprobaci&#xF3;n expl&#xED;cita antes de escribir archivos o ejecutar comandos. Ves exactamente qu&#xE9; va a pasar antes de confirmar.</div></div>
+      <div class="sc"><div class="sc-t">&#x1F310; AI Routing via SAP AI Core</div>
+        <div class="sc-d en">Only conversation messages and context are sent to the AI model &#x2014; routed through SAP AI Core. No files, tokens, passwords, or audio are ever transmitted.</div>
+        <div class="sc-d es">Solo los mensajes y contexto de la conversaci&#xF3;n se env&#xED;an al modelo de IA &#x2014; via SAP AI Core. Ning&#xFA;n archivo, token, contrase&#xF1;a o audio se transmite jam&#xE1;s.</div></div>
+    </div>
+    <div class="ibox green mt8"><p class="en">&#x2705; Joule Work Desktop is designed for SAP internal use with a <strong>privacy-first architecture.</strong> Conversations are stored locally encrypted, voice is processed on-device, files never leave your machine without your explicit approval, and prompts are routed through SAP AI Core under Data Processing Agreements.</p>
+    <p class="es">&#x2705; Joule Work Desktop est&#xE1; dise&#xF1;ado para uso interno de SAP con una <strong>arquitectura centrada en la privacidad.</strong> Las conversaciones se almacenan localmente encriptadas, la voz se procesa en el dispositivo, los archivos nunca salen sin tu aprobaci&#xF3;n, y los prompts se env&#xED;an via SAP AI Core bajo Acuerdos de Procesamiento de Datos.</p></div>
+  </div>
+</div>
+
+<!-- SLIDE 20: PRIVACY FAQ -->
+<div class="slide s-con" data-n="20">
+  <div class="s-hd"><div class="stag en">FAQ</div><div class="stag es">Preguntas Frecuentes</div>
+    <h2 class="en">Frequently Asked Questions</h2><h2 class="es">Preguntas Frecuentes</h2>
+    <div class="sd en">The most common questions about privacy, data, and how Joule works under the hood.</div>
+    <div class="sd es">Las preguntas m&#xE1;s frecuentes sobre privacidad, datos y c&#xF3;mo funciona Joule por dentro.</div>
+  </div>
+  <div class="s-bd">
+    <div class="faq-item"><div class="faq-q en">&#x1F4CD; Where are my conversations stored?</div><div class="faq-q es">&#x1F4CD; &#xBF;D&#xF3;nde se almacenan mis conversaciones?</div>
+      <div class="faq-a en">Locally on your device in an encrypted database (AES-256). <strong>Not on SAP servers, not on Microsoft or Anthropic infrastructure.</strong></div>
+      <div class="faq-a es">Localmente en tu dispositivo en una base de datos encriptada (AES-256). <strong>No en servidores de SAP, ni en la infraestructura de Microsoft o Anthropic.</strong></div></div>
+    <div class="faq-item"><div class="faq-q en">&#x1F441;&#xFE0F; Can SAP read my Joule conversations?</div><div class="faq-q es">&#x1F441;&#xFE0F; &#xBF;Puede SAP leer mis conversaciones de Joule?</div>
+      <div class="faq-a en">No. Your conversation data does not leave your machine unless you explicitly share it. <strong>SAP receives anonymised usage telemetry only</strong> (e.g. feature usage frequency, not content).</div>
+      <div class="faq-a es">No. Los datos de tus conversaciones no salen de tu m&#xE1;quina a menos que los compartas expl&#xED;citamente. <strong>SAP solo recibe telemetr&#xED;a de uso anonimizada</strong> (ej. frecuencia de uso, no el contenido).</div></div>
+    <div class="faq-item"><div class="faq-q en">&#x1F916; What about the AI models processing my prompts?</div><div class="faq-q es">&#x1F916; &#xBF;Qu&#xE9; pasa con los modelos de IA que procesan mis prompts?</div>
+      <div class="faq-a en">Your prompt is routed through <strong>SAP AI Core</strong> &#x2014; SAP's managed AI infrastructure &#x2014; where it is processed by the AI model. The underlying models are managed by SAP and selected to meet SAP's enterprise security and data protection standards.</div>
+      <div class="faq-a es">Tu prompt se enruta a trav&#xE9;s de <strong>SAP AI Core</strong> &#x2014; la infraestructura de IA gestionada por SAP &#x2014; donde es procesado por el modelo. Los modelos son gestionados por SAP y seleccionados para cumplir los est&#xE1;ndares empresariales de seguridad y protecci&#xF3;n de datos.</div></div>
+    <div class="faq-item"><div class="faq-q en">&#x1F512; Is my input forwarded to Anthropic?</div><div class="faq-q es">&#x1F512; &#xBF;Mi input se env&#xED;a a Anthropic?</div>
+      <div class="faq-a en">Yes &#x2014; technically necessary because that is where the language models run. However, processing takes place via <strong>contractually secured enterprise access, not publicly accessible instances.</strong> Your data is isolated from other customers, use for model training is <strong>contractually prohibited,</strong> and providers are bound by Data Processing Agreements (DPAs).</div>
+      <div class="faq-a es">S&#xED; &#x2014; es t&#xE9;cnicamente necesario porque ah&#xED; corren los modelos. Sin embargo, el procesamiento ocurre via <strong>acceso empresarial contractualmente asegurado, no instancias p&#xFA;blicas.</strong> Tus datos est&#xE1;n aislados, el uso para entrenamiento est&#xE1; <strong>contractualmente prohibido,</strong> y los proveedores est&#xE1;n vinculados por Acuerdos de Procesamiento de Datos (DPAs).</div></div>
+    <div class="faq-item"><div class="faq-q en">&#x2705; Is Joule approved for use with confidential data?</div><div class="faq-q es">&#x2705; &#xBF;Est&#xE1; Joule aprobado para usar con datos confidenciales?</div>
+      <div class="faq-a en">You may include confidential data <strong>provided there is a specific purpose and legal basis,</strong> and when handling complies with applicable Security Policies and SAP Product Standards. See the Joule Work Desktop Data Usage Guideline for full details.</div>
+      <div class="faq-a es">Pod&#xE9;s incluir datos confidenciales <strong>siempre que haya una finalidad espec&#xED;fica y base legal,</strong> y que el manejo cumpla con las Pol&#xED;ticas de Seguridad y Est&#xE1;ndares de Producto de SAP aplicables. Ver la Directriz de Uso de Datos de Joule Work Desktop para detalles completos.</div></div>
+  </div>
+</div>
+
+<!-- SLIDE 21: KEY TAKEAWAYS -->
+<div class="slide s-out" data-n="21">
+  <div class="ot en">Key Takeaways</div><div class="ot es">Puntos Clave</div>
+  <div class="os en">Everything that matters &#x2014; in 9 cards.</div><div class="os es">Todo lo que importa &#x2014; en 9 tarjetas.</div>
+  <div class="og" style="grid-template-columns:repeat(3,1fr);max-width:900px">
+    <div class="oc"><div class="on">01</div><div class="otit en">Ask, Don't Search</div><div class="otit es">Pregunt&#xE1;, No Busques</div><div class="od en">Joule acts on your behalf. It's a capable colleague, not a search engine.</div><div class="od es">Joule act&#xFA;a por vos. Es un colega capaz, no un buscador.</div></div>
+    <div class="oc"><div class="on">02</div><div class="otit en">Set Your Working Directory First</div><div class="otit es">Configur&#xE1; el Directorio Primero</div><div class="od en">It's the sandbox. Do it on first launch &#x2014; Joule only sees what's inside that folder.</div><div class="od es">Es el sandbox. Hac&#xE9;lo en el primer lanzamiento &#x2014; Joule solo ve lo que est&#xE1; en esa carpeta.</div></div>
+    <div class="oc"><div class="on">03</div><div class="otit en">Context &#x2013; Goal &#x2013; Format</div><div class="otit es">Contexto &#x2013; Objetivo &#x2013; Formato</div><div class="od en">Every effective prompt has three parts. Include all three and Joule delivers every time.</div><div class="od es">Todo prompt efectivo tiene tres partes. Incluilas todas y Joule entrega siempre.</div></div>
+    <div class="oc"><div class="on">04</div><div class="otit en">Conversations Explore, Spaces Monitor</div><div class="otit es">Conversaciones Exploran, Spaces Monitorean</div><div class="od en">One-off tasks &#x2192; Conversation. Ongoing dashboards &#x2192; Space. 4&#x2013;7 cards per Space.</div><div class="od es">Tareas puntuales &#x2192; Conversaci&#xF3;n. Dashboards continuos &#x2192; Space. 4&#x2013;7 tarjetas por Space.</div></div>
+    <div class="oc"><div class="on">05</div><div class="otit en">Skills &amp; Connectors Unlock Power</div><div class="otit es">Skills y Conectores Desbloquean el Potencial</div><div class="od en">Skills automate your workflows. Connectors give live data access. Use both to get the most out of Joule.</div><div class="od es">Los Skills automatizan tus flujos. Los Conectores dan acceso a datos en vivo. Us&#xE1; ambos para sacarle el m&#xE1;ximo.</div></div>
+    <div class="oc"><div class="on">06</div><div class="otit en">Privacy by Design</div><div class="otit es">Privacidad por Dise&#xF1;o</div><div class="od en">AES-256 encryption locally. On-device voice. Sandboxed files. Approval before every action.</div><div class="od es">Encriptaci&#xF3;n AES-256 local. Voz en el dispositivo. Archivos en sandbox. Aprobaci&#xF3;n antes de cada acci&#xF3;n.</div></div>
+    <div class="oc"><div class="on">07</div><div class="otit en">Verify AI Output Always</div><div class="otit es">Verific&#xE1; Siempre la Salida de IA</div><div class="od en">Joule is confident but sometimes wrong. Cross-check facts before high-stakes use.</div><div class="od es">Joule es seguro pero a veces incorrecto. Verific&#xE1; los hechos antes de un uso de alto impacto.</div></div>
+    <div class="oc"><div class="on">08</div><div class="otit en">Know What Data NOT to Enter</div><div class="otit es">Sab&#xE9; Qu&#xE9; Datos NO Ingresar</div><div class="od en">No bulk personal data, no credentials, no SAP Restricted/Confidential content, no employee evaluations.</div><div class="od es">Sin datos personales en masa, sin credenciales, sin SAP Restricted/Confidential, sin evaluaciones de empleados.</div></div>
+    <div class="oc"><div class="on">09</div><div class="otit en">Joule is Part of a Bigger Ecosystem</div><div class="otit es">Joule es Parte de un Ecosistema Mayor</div><div class="od en">Joule / Joule Work / Joule Work Desktop / Joule Studio &#x2014; each serves a different purpose. Know when to use which.</div><div class="od es">Joule / Joule Work / Joule Work Desktop / Joule Studio &#x2014; cada uno sirve un prop&#xF3;sito diferente. Sab&#xE9; cu&#xE1;ndo usar cu&#xE1;l.</div></div>
+  </div>
+</div>
+
+</div><!-- end #wrap -->
+
+<!-- ── BOTTOM NAV ── -->
+<div id="nav">
+  <button class="nb" id="btnP" onclick="go(-1)" disabled>&#x2190;</button>
+  <div id="dots"></div>
+  <button class="nb" id="btnN" onclick="go(1)">&#x2192;</button>
+  <span class="nav-hint en">&#x2190; &#x2192; arrow keys &#xB7; swipe on mobile</span>
+  <span class="nav-hint es">&#x2190; &#x2192; teclas de flecha &#xB7; desliz&#xE1; en m&#xF3;vil</span>
+</div>
+
+<script>
+const TOTAL=21;let cur=1;
+const pf=document.getElementById('pf'),ctr=document.getElementById('ctr');
+const btnP=document.getElementById('btnP'),btnN=document.getElementById('btnN');
+const dotsEl=document.getElementById('dots');
+for(let i=1;i<=TOTAL;i++){const d=document.createElement('div');d.className='dot'+(i===1?' on':'');d.onclick=()=>goTo(i);dotsEl.appendChild(d);}
+function goTo(n){if(n<1||n>TOTAL||n===cur)return;const dir=n>cur?1:-1;const prev=document.querySelector('.slide.active');if(prev){prev.classList.remove('active','af','ab');}cur=n;const next=document.querySelector('.slide[data-n="'+cur+'"]');next.classList.add('active',dir>0?'af':'ab');next.scrollTop=0;next.addEventListener('animationend',()=>next.classList.remove('af','ab'),{once:true});update();}
+function go(d){goTo(cur+d);}
+function update(){pf.style.width=((cur/TOTAL)*100)+'%';ctr.textContent=cur+' / '+TOTAL;btnP.disabled=(cur===1);btnN.disabled=(cur===TOTAL);document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i+1===cur));}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown')go(1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(-1);if(e.key==='Home')goTo(1);if(e.key==='End')goTo(TOTAL);});
+let tx=0;const wrap=document.getElementById('wrap');
+wrap.addEventListener('touchstart',e=>{tx=e.touches[0].clientX;},{passive:true});
+wrap.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)go(dx<0?1:-1);},{passive:true});
+function toggleLang(){const b=document.body,btn=document.getElementById('langBtn');if(b.classList.contains('lang-en')){b.classList.replace('lang-en','lang-es');btn.textContent='\uD83C\uDF10 EN';}else{b.classList.replace('lang-es','lang-en');btn.textContent='\uD83C\uDF10 ES';}}
+update();
+</script>
+</body>
+</html>
